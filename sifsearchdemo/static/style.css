@@ -9,14 +9,16 @@ body {
 
     /* For Centering the Div */
     position: fixed;
+    margin-top: 3em;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60%;
+    width: 70%;
     background-color: rgb(253, 253, 253);
     border: 1px solid rgb(209, 209, 209);
     border-radius: 5px;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
+    padding-bottom: 1em;
 
 }
 
@@ -67,6 +69,26 @@ body {
 .uploadbutton {
     font-size: 100%;
     margin: 1em;
+    background-color: black;
+    color: white;
+}
+
+/* upload success styling */
+.upload_success {
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
+    border: 1px solid rgb(209, 209, 209);
+    padding: 1em;
+    margin: 0 auto;
+    background-color: rgb(245, 244, 244);
+    width: 60%;
+    padding-bottom: 0.5em;
+}
+
+.gobackbtn {
+    font-size: 100%;
+    text-align: center;
     background-color: black;
     color: white;
 }
