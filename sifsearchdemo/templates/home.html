@@ -13,6 +13,7 @@
 <body>
     <div class = "main">
     <br>
+    <br>
     <div class = "welcomediv">
         <h1 class = "sifsearchtitle"> SIFSearch<i class="fa-solid fa-magnifying-glass"></i></h1>
         <div class = "searchbardiv">
@@ -24,18 +25,22 @@
             <h3>Upload Something Cool.</i></i></h3>
             <form>
                 <label for="title">Title:</label><br>
-                <input type="text" id="title" name="title"><br>
+                <input type="text" id="title" placeholder="Call It Something." name="title"><br>
                 <label for="description">Description:</label><br>
-                <input type="text" id="description" name="description">
+                <input type="text" id="description" placeholder="Describe It." name="description">
+                <br>
+                <label for="link_entry">Link:</label><br>
+                <input type="text" id="link_entry" placeholder="Describe It." name="link_entry">
               </form>
               <button onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
         </div>
-        
         <div id = "upload_success" class = "upload_success">
             <div class = "style_upload">
             <h3 >Nice. You've uploaded something cool.</h3>
             <b>Name of Entry: </b><p id = "title_success"></p> 
             <b>Description:</b> <p id = "descr_success"></p>
+            <b>Link:</b>  <a id = "link_success" target="_blank" href="">Link to Media</a>
+            <br>
             <button onclick="goBack()" class = "gobackbtn"> Return Home. <i class="fa fa-home" aria-hidden="true"></i></i></button>
         </div>  
     </div>
