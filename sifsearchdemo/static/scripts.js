@@ -1,24 +1,34 @@
 let search_entries = [];
-/*
-let mainDiv = document.querySelector('.welcomediv');
-let searchDiv = document.createElement('div');
-searchDiv.classList.add('search-list');
-*/
+let add_endpoint = "http://127.0.0.1:8000/addentry/";
 
 window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("upload_success").style.display = "none";
 });
-
+/* code copied from django docs */
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
 let mainDiv = document.querySelector('.welcomediv');
 let searchDiv = document.createElement('div');
 searchDiv.classList.add('search-list');
 mainDiv.appendChild(searchDiv);
 
-
 function uploadFunction() {
 
   let entry = {
-    title: document.getElementById('title').value,
+    name: document.getElementById('title').value,
     description: document.getElementById('description').value,
     link: document.getElementById('link_entry').value
   }
@@ -26,8 +36,21 @@ function uploadFunction() {
   document.forms[0].reset();
   console.log(JSON.stringify(entry)); /* debugging */
   console.log(search_entries); /* debugging, making sure that values have been added into the list */
-  addSearchEntry(entry.title, entry.description,entry.link)
-  uploadSuccess(entry.title, entry.description,entry.link)
+  addSearchEntry(entry.name, entry.description,entry.link)
+  /* make an api call */
+  let upload_request = new XMLHttpRequest();
+  
+  upload_request.open('POST', add_endpoint);
+  upload_request.setRequestHeader("Accept", "application/json");
+  upload_request.setRequestHeader("Content-Type", "application/json");
+  const csrftoken = getCookie('csrftoken');
+
+  upload_request.setRequestHeader("X-CSRFToken", csrftoken);
+  upload_request.send(JSON.stringify(entry));
+
+  console.log("HIT API");
+  uploadSuccess(entry.name, entry.description,entry.link)
+
 
 }
 function uploadSuccess(title,description,link) {
