@@ -11,16 +11,15 @@ body {
 }
 
 .main-title {
-    color:rgb(96, 72, 192);
+    color:rgb(24, 24, 26);
 }
 .welcomediv {
 
     /* For Centering the Div */
     margin: 0 auto;
 
-    width: 70%;
+    width: 65%;
     background: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);
-    border: 1px solid rgb(209, 209, 209);
     border-radius: 5px;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
     padding-bottom: 3em;
@@ -32,12 +31,11 @@ body {
 }
 .search-btn-mode,.upload-btn-mode {
     font-size: 100%;
-    border:5px;
-    padding:0.2em;
+    padding:0.4em;
     margin:0.2em;
     background-color: rgb(96, 72, 192);
     color: white;
-    border: 2px solid rgb(51, 5, 82);
+    border: 1px solid rgb(233, 233, 233);
    
     border-radius: 5px;
 }
@@ -112,6 +110,8 @@ body {
 }
 
 .upload_div {
+    border: 0.5px solid rgb(211, 211, 211);
+
     animation: fadein 2s;
     border-radius: 5px;
     text-align: center;
@@ -120,7 +120,7 @@ body {
     margin: 0 auto;
     position: relative;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
-    border: 2px solid rgb(91, 91, 91);
+    
     padding-bottom: 0.5em;
 }
 
@@ -144,8 +144,9 @@ body {
     animation: fadein 2s;
     text-align: center;
     border-radius: 5px;
+    border: 0.5px solid rgb(211, 211, 211);
+
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
-    border: 2px solid rgb(91, 91, 91);
     padding: 1em;
     margin: 0 auto;
     background-color: rgb(255, 255, 255);
