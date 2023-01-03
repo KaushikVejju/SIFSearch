@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR/'static']
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,6 +29,10 @@ SECRET_KEY = 'django-insecure-*n#7@$5r6_&qpc5dtnnh@udsy!+-mlpub=!mtfsn-dj_jp)%8$
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ALGOLIA = {
+    'APPLICATION_ID': 'MAPEN2F6CS',
+    'API_KEY': 'c44636e845a9f225f89755f7eb7b77d0'
+}
 
 
 # Application definition
@@ -37,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'sifsearchdemo',
+    'algoliasearch_django'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +64,7 @@ ROOT_URLCONF = 'sifsearchdemo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

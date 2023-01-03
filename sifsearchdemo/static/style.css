@@ -1,0 +1,141 @@
+/* Body CSS*/
+body {
+    animation: fadein 2s;
+    background-color: rgb(231, 231, 231);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.welcomediv {
+
+    /* For Centering the Div */
+    margin: 0 auto;
+
+    width: 70%;
+    background-color: rgb(253, 253, 253);
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 5px;
+    box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
+    padding-bottom: 3em;
+
+}
+
+.searchbardiv {
+    padding-top:0.2em;
+    padding-bottom: 2em;
+    text-align: center;
+}
+.searchbar {
+    margin-right:-10px;
+    border-radius: 0;
+    border: 2px solid black;
+    width: 60%;
+    height: 2em;
+}
+
+.searchbutton {
+    border-radius: 5px;
+    border: 2px solid black;
+    color: white;
+    background-color: black;
+    height: 2.45em;
+
+}
+.sifsearchtitle {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    white-space: nowrap;
+    margin: 0 auto;
+    color: black;  
+    text-align: center;
+    overflow: hidden;
+    animation: 
+    typing 3.5s;
+}
+
+.upload_div {
+    
+    animation: fadein 2s;
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgb(245, 244, 244);
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
+    border: 1px solid rgb(209, 209, 209);
+    padding-bottom: 0.5em;
+}
+
+.uploadbutton {
+    border-radius: 5px;
+    font-size: 100%;
+    margin: 1em;
+    background-color: black;
+    color: white;
+}
+
+/* upload success styling */
+.upload_success {
+    animation: fadein 2s;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
+    border: 1px solid rgb(209, 209, 209);
+    padding: 1em;
+    margin: 0 auto;
+    background-color: rgb(245, 244, 244);
+    width: 60%;
+    padding-bottom: 0.5em;
+}
+
+.gobackbtn {
+    margin-top: 1em;
+    border-radius: 5px;
+    font-size: 100%;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+/* Style for the search entry */
+.search-list {
+    text-align: center;
+}
+.search_item {
+    animation: fadein 2s;
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
+    border: 2px solid rgb(0, 0, 0);
+    padding-bottom: 0.5em;
+}
+.clearsearch {
+    
+    border-radius: 5px;
+    font-size: 100%;
+    text-align: center;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 2em;
+}
+
+/* Animations */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
