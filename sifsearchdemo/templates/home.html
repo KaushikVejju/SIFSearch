@@ -17,12 +17,12 @@
     <br>
     <br>
     <div class = "welcomediv">
-        <h1 class = "sifsearchtitle"> SIFSearch<i class="fa-solid fa-magnifying-glass"></i></h1>
-        <button onclick="hideupload()"> Clear Upload </button>
-
+        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i class="fa-solid fa-magnifying-glass"></i></h1>
+        <div class = "option-div">
+            <button id = "search-btn-mode" class="search-btn-mode" onclick="search_mode()">Search</button>
+            <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="upload_mode()">Upload</button>
+        </div>
         <div id = "searchbardiv" class = "searchbardiv">
-            <input id = "search-item" class = "searchbar" type="text" placeholder=" Search Something Cool.">
-            <button class = "clearsearch" onclick = "clearsearch()">Clear Search</button>
         </div>
         <script type = "text/html" id = "hit-template">
            
@@ -31,10 +31,11 @@
                     <h3 class = "hit-link"> {{link}}</h3>
             </div>
         </script>
-        <div id = "hits"></div>
+        <div  id = "hits"></div>
         <div id = "pagination"></div>
+        <br>
         <div id = "upload_div" class = "upload_div">
-            <h3>Upload Something Cool.</i></i></h3>
+            <h3 class = "upload-title">Upload Something Cool.</i></i></h3>
             <form>
                 <label for="title">Title:</label><br>
                 <input type="text" id="title" placeholder="Call It Something." name="title"><br>
@@ -49,12 +50,12 @@
 
         <div id = "upload_success" class = "upload_success">
             <div class = "style_upload">
-            <h3 >Nice. You've uploaded something cool.</h3>
+            <h3 class = "nice-comment">Nice. You've uploaded something cool.</h3>
             <b>Name of Entry: </b><p id = "title_success"></p> 
             <b>Description:</b> <p id = "descr_success"></p>
             <b>Link:</b>  <a id = "link_success" target="_blank" href="">Link to Media</a>
             <br>
-            <button onclick="goBack()" class = "gobackbtn"> Return Home. <i class="fa fa-home" aria-hidden="true"></i></i></button>
+            <button onclick="goBack()" class = "gobackbtn"> Upload More </button>
         </div>  
     </div>
 </div>

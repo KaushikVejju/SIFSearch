@@ -6,5 +6,5 @@ class EntrySerializer(serializers.ModelSerializer):
     # about the model
     class Meta:
         model = SearchEntry
-        fields = ['id', 'name', 'description', 'link']
+        fields = ['name', 'description', 'link']
 
