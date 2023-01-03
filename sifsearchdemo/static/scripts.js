@@ -1,9 +1,36 @@
 let search_entries = [];
 let add_endpoint = "http://127.0.0.1:8000/addentry/";
+/* instant search config */
+const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
+const search = instantsearch({
+  indexName: 'SearchEntry',
+  searchClient,
+});
+
+
 
 window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("upload_success").style.display = "none";
 });
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container:'#searchbardiv'
+  })
+)
+search.addWidget(
+  instantsearch.widgets.hits({
+    container:'#hits',
+    hitsPerPage:10,
+    
+    templates: {
+      item: '<p>{{name}}</p><br><p>{{description}}</p><br>'
+    }
+    
+  })
+)
+search.start();
+
+
 /* code copied from django docs */
 function getCookie(name) {
   let cookieValue = null;
@@ -20,6 +47,9 @@ function getCookie(name) {
   }
   return cookieValue;
 }
+
+/* test function, just to play around */
+
 let mainDiv = document.querySelector('.welcomediv');
 let searchDiv = document.createElement('div');
 searchDiv.classList.add('search-list');
@@ -51,6 +81,18 @@ function uploadFunction() {
   console.log("HIT API");
   uploadSuccess(entry.name, entry.description,entry.link)
 
+
+}
+function hideupload() {
+  let up_div = document.getElementById("upload_div").style.display;
+  if (up_div == "none") {
+    document.getElementById("upload_success").style.display = "block";
+    document.getElementById("upload_div").style.display = "block";
+  }
+ else {
+    document.getElementById("upload_success").style.display = "none";
+    document.getElementById("upload_div").style.display = "none";
+  }
 
 }
 function uploadSuccess(title,description,link) {
@@ -89,7 +131,7 @@ function addSearchEntry(title, description,link) {
 }
 
 /* searching for an entry dynamically */
-
+/*
 function search () {
   document.getElementById("upload_div").style.display = "none";
   document.getElementById("upload_success").style.display = "none";
@@ -120,5 +162,5 @@ function clearsearch() {
 }
 
 
-
+*/
 
