@@ -1,9 +1,45 @@
 let search_entries = [];
 let add_endpoint = "http://127.0.0.1:8000/addentry/";
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  document.getElementById("upload_success").style.display = "none";
+/* instant search config */
+const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
+const search = instantsearch({
+  indexName: 'SearchEntry',
+  searchClient
 });
+
+
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container:'#searchbardiv'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container:'#hits', 
+
+    templates: {
+
+      item: 
+      `<div class = "hit-item">
+          <p class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
+          <p><b>Description: </b>{{{_highlightResult.description.value}}}</p>
+          
+          <button onclick="window.open('{{link}}')" class = "view-media"> View Media </button>
+       </div>
+      `,
+    }
+
+  })
+)
+search.start();
+window.addEventListener('DOMContentLoaded', (event) => {
+  document.getElementById("searchbardiv").style.display = "none";
+  document.getElementById("upload_success").style.display = "none";
+  document.getElementById("hits").style.display = "none";
+  document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
+
+});
+
 /* code copied from django docs */
 function getCookie(name) {
   let cookieValue = null;
@@ -20,11 +56,36 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-let mainDiv = document.querySelector('.welcomediv');
-let searchDiv = document.createElement('div');
-searchDiv.classList.add('search-list');
-mainDiv.appendChild(searchDiv);
 
+function openLink() {
+  window.open()
+}
+
+function upload_mode() {
+  let uploadDiv = document.getElementById('upload_div');
+  let uploadSuccess = document.getElementById('upload_success');
+  if (uploadDiv.style.display=='none' && uploadSuccess.style.display == 'none' ) {
+    document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
+    document.getElementById("search-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
+    uploadDiv.style.display = "block";
+    document.getElementById("searchbardiv").style.display = "none";
+    document.getElementById("hits").style.display = "none";
+  }
+}
+
+function search_mode() {
+  let searchbarDiv = document.getElementById('searchbardiv');
+  let hits = document.getElementById('hits');
+  if (searchbarDiv.style.display=='none' && hits.style.display == 'none' ) {
+    document.getElementById("search-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
+    document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
+    searchbarDiv.style.display = "block";
+    hits.style.display = "block";
+    document.getElementById("upload_div").style.display = "none";
+    document.getElementById("upload_success").style.display = "none";
+  }
+}
+ 
 function uploadFunction() {
 
   let entry = {
@@ -36,7 +97,6 @@ function uploadFunction() {
   document.forms[0].reset();
   console.log(JSON.stringify(entry)); /* debugging */
   console.log(search_entries); /* debugging, making sure that values have been added into the list */
-  addSearchEntry(entry.name, entry.description,entry.link)
   /* make an api call */
   let upload_request = new XMLHttpRequest();
   
@@ -53,9 +113,9 @@ function uploadFunction() {
 
 
 }
+
+
 function uploadSuccess(title,description,link) {
-  
-  document.querySelector(".search-list").style.display = "none";
   document.getElementById("upload_div").style.display = "none";
   document.getElementById("upload_success").style.display = "block";
   document.getElementById('link_success').href = link;
@@ -65,31 +125,14 @@ function uploadSuccess(title,description,link) {
 }
 
 function goBack() {
-  document.getElementById("upload_success").style.display = "none";
-  document.getElementById("upload_div").style.display = "block";
-  document.querySelector(".search-list").style.display = "none";
+  window.location.reload();
 
 }
 
 
-function addSearchEntry(title, description,link) {
-
-  console.log("bro");
-  let searchEntryDetails = `
-        <div id = "search_entry" class = "search_item"> 
-            <br>
-            <p class = "title_item">${title}</p>
-            <p class = "description_item">${description}</p>
-            <a href="${link}" target="_blank">Link to Media</a>
-        </div>
-        <br>
-  `;
-  searchDiv.insertAdjacentHTML('beforeend',searchEntryDetails);
-
-}
 
 /* searching for an entry dynamically */
-
+/*
 function search () {
   document.getElementById("upload_div").style.display = "none";
   document.getElementById("upload_success").style.display = "none";
@@ -120,5 +163,5 @@ function clearsearch() {
 }
 
 
-
+*/
 

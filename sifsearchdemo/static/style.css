@@ -1,36 +1,93 @@
 /* Body CSS*/
+html {
+    background: linear-gradient(to bottom,#6842a9 0%, #9999ff 100%);
+    height: 100%;
+
+}
 body {
+
     animation: fadein 2s;
-    background-color: rgb(231, 231, 231);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-
+.main-title {
+    color:rgb(96, 72, 192);
+}
 .welcomediv {
 
     /* For Centering the Div */
     margin: 0 auto;
 
     width: 70%;
-    background-color: rgb(253, 253, 253);
+    background: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);
     border: 1px solid rgb(209, 209, 209);
     border-radius: 5px;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
     padding-bottom: 3em;
 
 }
-
+.option-div {
+    text-align: center;
+    margin-bottom: 0.2em;
+}
+.search-btn-mode,.upload-btn-mode {
+    font-size: 100%;
+    border:5px;
+    padding:0.2em;
+    margin:0.2em;
+    background-color: rgb(96, 72, 192);
+    color: white;
+    border: 2px solid rgb(51, 5, 82);
+   
+    border-radius: 5px;
+}
+.search-btn-mode:hover{
+    background-color: rgb(67, 24, 108);
+}
+.upload-btn-mode:hover{
+    background-color: rgb(67, 24, 108);
+}
 .searchbardiv {
+    margin-top: 0.5em;
+    animation: fadein 2s;
     padding-top:0.2em;
     padding-bottom: 2em;
     text-align: center;
 }
-.searchbar {
-    margin-right:-10px;
-    border-radius: 0;
+#searchbardiv input {
     border: 2px solid black;
     width: 60%;
     height: 2em;
+    
+}
+#hits {
+    margin-top:0.5em;
+    animation: fadein 2s;
+}
+.ais-SearchBox-submit {
+    border-radius: 2.5px;
+    color: rgb(39, 3, 3);
+    background-color: rgb(255, 255, 255);
+    height: 2em;
+    margin-left:0.5em;
+
+}
+
+.ais-ais-SearchBox-loadingIndicator {
+    margin-left:1em;
+
+}
+.ais-SearchBox-reset {
+    border-radius: 2.5px;
+    color: rgb(39, 3, 3);
+    background-color: rgb(255, 255, 255);
+    height: 2em;
+    margin-left:0.5em;
+}
+.searchbar {
+    margin-right:-10px;
+    border-radius: 0;
+    
 }
 
 .searchbutton {
@@ -41,12 +98,13 @@ body {
     height: 2.45em;
 
 }
+
 .sifsearchtitle {
     padding-top: 1em;
     padding-bottom: 0.5em;
     white-space: nowrap;
     margin: 0 auto;
-    color: black;  
+    color: rgb(18, 0, 0);  
     text-align: center;
     overflow: hidden;
     animation: 
@@ -54,37 +112,43 @@ body {
 }
 
 .upload_div {
-    
     animation: fadein 2s;
     border-radius: 5px;
     text-align: center;
-    background-color: rgb(245, 244, 244);
+    background-color: rgb(255, 255, 255);
     width: 60%;
     margin: 0 auto;
     position: relative;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
-    border: 1px solid rgb(209, 209, 209);
+    border: 2px solid rgb(91, 91, 91);
     padding-bottom: 0.5em;
 }
 
 .uploadbutton {
-    border-radius: 5px;
     font-size: 100%;
     margin: 1em;
-    background-color: black;
+    background-color: rgb(96, 72, 192);
     color: white;
-}
+    border: 2px solid rgb(74, 7, 103);
 
+}
+.nice-comment {
+    color:rgb(96, 72, 192);
+
+}
+.upload-title {
+    color:rgb(96, 72, 192);
+}
 /* upload success styling */
 .upload_success {
     animation: fadein 2s;
     text-align: center;
     border-radius: 5px;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
-    border: 1px solid rgb(209, 209, 209);
+    border: 2px solid rgb(91, 91, 91);
     padding: 1em;
     margin: 0 auto;
-    background-color: rgb(245, 244, 244);
+    background-color: rgb(255, 255, 255);
     width: 60%;
     padding-bottom: 0.5em;
 }
@@ -94,7 +158,7 @@ body {
     border-radius: 5px;
     font-size: 100%;
     text-align: center;
-    background-color: black;
+    background-color: rgb(96, 72, 192);
     color: white;
 }
 
@@ -119,10 +183,29 @@ body {
     border-radius: 5px;
     font-size: 100%;
     text-align: center;
-    background-color: black;
+    background-color:rgb(96, 72, 192);
     color: white;
     text-align: center;
     height: 2em;
+}
+/* search item */
+.hit-item{
+    margin: 0 auto;
+    background: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);    
+    box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
+    border: 2px solid rgb(117, 117, 117);
+    padding:0.5em;
+    line-height: 1em;
+    width: 50%;
+    margin-bottom: 1em;
+    text-align: center;
+}
+.view-media {
+    background-color: rgb(75, 77, 177);
+    color: white;
+    border: 1px solid rgb(85, 58, 177);
+    border-radius: 5px;
+    padding: 0.5em;
 }
 
 /* Animations */
