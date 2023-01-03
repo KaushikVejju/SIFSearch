@@ -29,6 +29,10 @@ SECRET_KEY = 'django-insecure-*n#7@$5r6_&qpc5dtnnh@udsy!+-mlpub=!mtfsn-dj_jp)%8$
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ALGOLIA = {
+    'APPLICATION_ID': 'MAPEN2F6CS',
+    'API_KEY': 'c44636e845a9f225f89755f7eb7b77d0'
+}
 
 
 # Application definition
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'sifsearchdemo',
+    'algoliasearch_django'
 ]
 
 MIDDLEWARE = [
