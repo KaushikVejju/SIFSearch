@@ -16,9 +16,7 @@ search.addWidget(
 search.addWidget(
   instantsearch.widgets.hits({
     container:'#hits', 
-
     templates: {
-
       item: 
       `<div class = "hit-item">
           <p class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
@@ -28,7 +26,6 @@ search.addWidget(
        </div>
       `,
     }
-
   })
 )
 search.start();
