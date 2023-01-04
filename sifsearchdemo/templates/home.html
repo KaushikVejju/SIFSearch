@@ -37,7 +37,8 @@
         <div id = "upload_div" class = "upload_div">
             <br>
             <h3 class = "upload-title">Upload Something Cool.</i></i></h3>
-            <form>
+            
+            <form id = "upload-form"> 
                 <label for="title">Title:</label><br>
                 <input type="text" id="title" placeholder="Call It Something." name="title"><br>
                 <label for="description">Description:</label><br>
@@ -45,8 +46,8 @@
                 <br>
                 <label for="link_entry">Link:</label><br>
                 <input type="text" id="link_entry" placeholder="Provide a Link...For Now" name="link_entry">
-              </form>
-              <button onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
+            </form>
+            <button type="submit" onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
         </div>
 
         <div id = "upload_success" class = "upload_success">
