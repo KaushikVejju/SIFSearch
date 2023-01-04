@@ -8,14 +8,17 @@ const search = instantsearch({
 });
 
 
+
 search.addWidget(
   instantsearch.widgets.searchBox({
-    container:'#searchbardiv'
+    container:'#searchbardiv',
+
   })
 );
 search.addWidget(
   instantsearch.widgets.hits({
     container:'#hits', 
+    hitsPerPage:4,
     templates: {
       item: 
       `<div class = "hit-item">
@@ -28,8 +31,16 @@ search.addWidget(
     }
   })
 )
+search.addWidget (
+  instantsearch.widgets.pagination({
+    container:'#pagination'
+  }
+  )
+)
 search.start();
 window.addEventListener('DOMContentLoaded', (event) => {
+  document.getElementById("pagination").style.display = "none";
+
   document.getElementById("searchbardiv").style.display = "none";
   document.getElementById("upload_success").style.display = "none";
   document.getElementById("hits").style.display = "none";
@@ -67,6 +78,8 @@ function upload_mode() {
     uploadDiv.style.display = "block";
     document.getElementById("searchbardiv").style.display = "none";
     document.getElementById("hits").style.display = "none";
+    document.getElementById("pagination").style.display = "none";
+
   }
 }
 
@@ -78,6 +91,7 @@ function search_mode() {
     document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
     searchbarDiv.style.display = "block";
     hits.style.display = "block";
+    document.getElementById("pagination").style.display = "block";
     document.getElementById("upload_div").style.display = "none";
     document.getElementById("upload_success").style.display = "none";
   }
@@ -122,7 +136,9 @@ function uploadSuccess(title,description,link) {
 }
 
 function goBack() {
-  window.location.reload();
+  document.getElementById("upload_success").style.display = "none";
+  document.getElementById("upload_div").style.display = "block";
+
 
 }
 
