@@ -8,12 +8,17 @@ const search = instantsearch({
 });
 
 
+
 search.addWidget(
   instantsearch.widgets.searchBox({
-    container:'#searchbardiv'
+    container:'#searchbardiv',
+
   })
 );
-search.addWidget(
+search.addWidgets([
+  instantsearch.widgets.configure({
+    hitsPerPage: 4,
+  }),
   instantsearch.widgets.hits({
     container:'#hits', 
     templates: {
@@ -27,9 +32,18 @@ search.addWidget(
       `,
     }
   })
+])
+search.addWidget (
+  instantsearch.widgets.pagination({
+    container:'#pagination'
+  }
+  )
 )
 search.start();
 window.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelector('.ais-SearchBox-input').placeholder = "Search Something Cool."
+  document.getElementById("pagination").style.display = "none";
+
   document.getElementById("searchbardiv").style.display = "none";
   document.getElementById("upload_success").style.display = "none";
   document.getElementById("hits").style.display = "none";
@@ -67,6 +81,8 @@ function upload_mode() {
     uploadDiv.style.display = "block";
     document.getElementById("searchbardiv").style.display = "none";
     document.getElementById("hits").style.display = "none";
+    document.getElementById("pagination").style.display = "none";
+
   }
 }
 
@@ -78,13 +94,14 @@ function search_mode() {
     document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
     searchbarDiv.style.display = "block";
     hits.style.display = "block";
+    document.getElementById("pagination").style.display = "block";
     document.getElementById("upload_div").style.display = "none";
     document.getElementById("upload_success").style.display = "none";
   }
 }
  
-function uploadFunction() {
 
+function uploadFunction() {
   let entry = {
     name: document.getElementById('title').value,
     description: document.getElementById('description').value,
@@ -122,7 +139,9 @@ function uploadSuccess(title,description,link) {
 }
 
 function goBack() {
-  window.location.reload();
+  document.getElementById("upload_success").style.display = "none";
+  document.getElementById("upload_div").style.display = "block";
+  document.getElementById("upload-form").reset();
 
 }
 

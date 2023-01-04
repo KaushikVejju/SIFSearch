@@ -7,4 +7,5 @@ class EntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = SearchEntry
         fields = ['name', 'description', 'link']
+       
 

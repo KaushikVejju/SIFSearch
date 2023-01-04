@@ -17,7 +17,7 @@
     <br>
     <br>
     <div class = "welcomediv">
-        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i class="fa-solid fa-magnifying-glass"></i></h1>
+        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i></h1>
         <div class = "option-div">
             <button id = "search-btn-mode" class="search-btn-mode" onclick="search_mode()">Search</button>
             <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="upload_mode()">Upload</button>
@@ -37,7 +37,7 @@
         <div id = "upload_div" class = "upload_div">
             <br>
             <h3 class = "upload-title">Upload Something Cool.</i></i></h3>
-            <form>
+            <form id = "upload-form"> 
                 <label for="title">Title:</label><br>
                 <input type="text" id="title" placeholder="Call It Something." name="title"><br>
                 <label for="description">Description:</label><br>
@@ -45,8 +45,8 @@
                 <br>
                 <label for="link_entry">Link:</label><br>
                 <input type="text" id="link_entry" placeholder="Provide a Link...For Now" name="link_entry">
-              </form>
-              <button onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
+            </form>
+            <button type="submit" onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
         </div>
 
         <div id = "upload_success" class = "upload_success">
