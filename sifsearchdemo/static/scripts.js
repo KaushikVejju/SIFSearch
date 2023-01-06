@@ -31,14 +31,13 @@ search.addWidgets([
        </div>
       `,
     }
-  })
-])
-search.addWidget (
+
+  }),
   instantsearch.widgets.pagination({
-    container:'#pagination'
-  }
-  )
-)
+    container: '#pagination',
+  }),
+])
+
 search.start();
 window.addEventListener('DOMContentLoaded', (event) => {
   document.querySelector('.ais-SearchBox-input').placeholder = "Search Something Cool."
