@@ -21,5 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls), path('', views.sif_search_home),
-    path('addentry/',views.add_entry)
+    path('addentrylink/',views.add_entry_link),
+    path('addentryfile/',views.add_entry_file)
+
 ]

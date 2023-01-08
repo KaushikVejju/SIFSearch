@@ -1,12 +1,13 @@
 let search_entries = [];
-let add_endpoint = "http://127.0.0.1:8000/addentry/";
+let add_link_endpoint = "http://127.0.0.1:8000/addentrylink/";
+let add_file_endpoint = "http://127.0.0.1:8000/addentryfile/";
+
 /* instant search config */
 const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
 const search = instantsearch({
   indexName: 'SearchEntry',
   searchClient
 });
-
 
 
 search.addWidget(
@@ -19,6 +20,10 @@ search.addWidgets([
   instantsearch.widgets.configure({
     hitsPerPage: 4,
   }),
+  instantsearch.widgets.refinementList({
+    container: '#refinement-list',
+    attribute: 'tag',
+  }),
   instantsearch.widgets.hits({
     container:'#hits', 
     templates: {
@@ -27,7 +32,7 @@ search.addWidgets([
           <p class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
           <p><b>Description: </b>{{{_highlightResult.description.value}}}</p>
           
-          <button onclick="window.open('{{link}}')" class = "view-media"> View Media </button>
+          <button onclick="showMedia('{{link}}', '{{file}}')" class = "view-media"> View Media </button>
        </div>
       `,
     }
@@ -35,7 +40,7 @@ search.addWidgets([
   }),
   instantsearch.widgets.pagination({
     container: '#pagination',
-  }),
+  })
 ])
 
 search.start();
@@ -46,9 +51,33 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("searchbardiv").style.display = "none";
   document.getElementById("upload_success").style.display = "none";
   document.getElementById("hits").style.display = "none";
-  document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
+  document.getElementById('refinement-list').style.display = "none";
 
+  document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
+  document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
+
+  document.getElementById("show-file").style.display = "none";
 });
+function showMedia(link, file) {
+  if (link=="") {
+    window.open(file)
+  } else {
+    window.open(link)
+  }
+}
+function pasteLink () {
+  document.getElementById("upload-file").style.backgroundColor = "rgb(96, 72, 192)";
+  document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
+  document.getElementById("show-link").style.display = "block";
+  document.getElementById("show-file").style.display = "none";
+}
+function uploadFile () {
+  document.getElementById("upload-file").style.backgroundColor = "rgb(74, 7, 103)";
+  document.getElementById("paste-link").style.backgroundColor = "rgb(96, 72, 192)";
+  document.getElementById("show-link").style.display= "none";
+  document.getElementById("show-file").style.display = "block";
+}
+
 
 /* code copied from django docs */
 function getCookie(name) {
@@ -70,8 +99,13 @@ function getCookie(name) {
 function openLink() {
   window.open()
 }
+function displayList() {
+  document.getElementById("hits").style.display = "block";
+}
 
 function upload_mode() {
+  document.getElementById("upload-form").reset();
+  document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
   let uploadDiv = document.getElementById('upload_div');
   let uploadSuccess = document.getElementById('upload_success');
   if (uploadDiv.style.display=='none' && uploadSuccess.style.display == 'none' ) {
@@ -81,6 +115,7 @@ function upload_mode() {
     document.getElementById("searchbardiv").style.display = "none";
     document.getElementById("hits").style.display = "none";
     document.getElementById("pagination").style.display = "none";
+    document.getElementById('refinement-list').style.display = "none";
 
   }
 }
@@ -88,41 +123,93 @@ function upload_mode() {
 function search_mode() {
   let searchbarDiv = document.getElementById('searchbardiv');
   let hits = document.getElementById('hits');
+  let refinementList = document.getElementById('refinement-list');
   if (searchbarDiv.style.display=='none' && hits.style.display == 'none' ) {
     document.getElementById("search-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
     document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
     searchbarDiv.style.display = "block";
     hits.style.display = "block";
+    refinementList.style.display = "block";
     document.getElementById("pagination").style.display = "block";
     document.getElementById("upload_div").style.display = "none";
     document.getElementById("upload_success").style.display = "none";
   }
 }
  
+function dummyFunc() {
+  let imgList = document.getElementById("myFile");
+  let img = imgList.files[0];
+  let entry = {
+    name: "hello",
+    image: img,
+  }
+
+  console.log(JSON.stringify(entry))
+}
 
 function uploadFunction() {
+  let upload_request = new XMLHttpRequest();
+  const csrftoken = getCookie('csrftoken');
+
+  let fileList = document.getElementById("myFile");
+  let fileEntry = fileList.files[0];
+
   let entry = {
     name: document.getElementById('title').value,
     description: document.getElementById('description').value,
-    link: document.getElementById('link_entry').value
+    link: document.getElementById('link_entry').value,
+    tag: document.getElementById("tag-form").value,
   }
-  search_entries.push(entry);
-  document.forms[0].reset();
-  console.log(JSON.stringify(entry)); /* debugging */
-  console.log(search_entries); /* debugging, making sure that values have been added into the list */
-  /* make an api call */
-  let upload_request = new XMLHttpRequest();
   
+  let formData = new FormData();
+  formData.append('name', document.getElementById('title').value);
+  formData.append('description', document.getElementById('description').value);
+  formData.append('link', document.getElementById('link_entry').value);
+  formData.append('tag', document.getElementById('tag-form').value);
+  console.log(document.getElementById("show-link").style.display !="none");
+  if (document.getElementById("show-link").style.display !="none") {
+    formData.append('link', document.getElementById('link_entry').value);
+    fetch(add_link_endpoint,{
+      method:'POST',
+      body: formData,
+      headers: {
+        'X-CSRFToken':csrftoken
+      }
+     })
+    
+      console.log("HIT API");
+      uploadSuccess(entry.name, entry.description,entry.link)
+  }
+  else {
+    formData.append('file',fileEntry);
+    fetch(add_file_endpoint,{
+      method:'POST',
+      body: formData,
+      headers: {
+        'X-CSRFToken':csrftoken
+      }
+     })
+    
+      console.log("HIT API");
+      uploadSuccess(entry.name, entry.description,entry.link)
+  }
+
+
+  /* search_entries.push(entry); */
+  document.forms[0].reset();
+  /*  console.log(JSON.stringify(entry));  *//* debugging */
+  /* console.log(search_entries);*/ /* debugging, making sure that values have been added into the list */
+  /* make an api call */
+  /*
   upload_request.open('POST', add_endpoint);
   upload_request.setRequestHeader("Accept", "application/json");
-  upload_request.setRequestHeader("Content-Type", "application/json");
-  const csrftoken = getCookie('csrftoken');
-
+  upload_request.setRequestHeader("Content-Type", " multipart/form-data");
+  */
+  /*
   upload_request.setRequestHeader("X-CSRFToken", csrftoken);
-  upload_request.send(JSON.stringify(entry));
+  upload_request.send(formData);
+  */
 
-  console.log("HIT API");
-  uploadSuccess(entry.name, entry.description,entry.link)
 
 
 }
@@ -143,40 +230,3 @@ function goBack() {
   document.getElementById("upload-form").reset();
 
 }
-
-
-
-/* searching for an entry dynamically */
-/*
-function search () {
-  document.getElementById("upload_div").style.display = "none";
-  document.getElementById("upload_success").style.display = "none";
-  document.querySelector(".search-list").style.display = "";
-  console.log("bro");
-  const searchInput = document.getElementById("search-item").value;
-  const item = document.querySelectorAll(".search_item")
-  const titleName = document.querySelectorAll(".title_item");
-  const descrName = document.querySelectorAll(".description_item");
-  for (var i = 0; i < titleName.length; i++) {
-    console.log(titleName[i].innerHTML)
-    if(titleName[i].innerHTML.toUpperCase().indexOf(searchInput.toUpperCase()) != -1 || 
-    descrName[i].innerHTML.toUpperCase().indexOf(searchInput.toUpperCase()) != -1) {
-      console.log("you have reached")
-      item[i].style.display = "block";
-    }
-    else {
-      item[i].style.display = "none";
-    }
-  }
-}
-
-function clearsearch() {
-  document.getElementById('search-item').value='';
-  document.querySelector(".search-list").style.display = "none";
-  document.getElementById("upload_div").style.display = "";
-
-}
-
-
-*/
-

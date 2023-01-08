@@ -20,18 +20,12 @@
     <div class = "welcomediv">
         <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i></h1>
         <div class = "option-div">
-            <button id = "search-btn-mode" class="search-btn-mode" onclick="search_mode()">Search</button>
             <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="upload_mode()">Upload</button>
+            <button id = "search-btn-mode" class="search-btn-mode" onclick="search_mode()">Search</button>
+
         </div>
-        <div id = "searchbardiv" class = "searchbardiv">
-        </div>
-        <script type = "text/html" id = "hit-template">
-           
-                    <h3 class = "hit-description"> {{name}}</h3>
-                    <h3 class = "hit-description"> {{description}}</h3>
-                    <h3 class = "hit-link"> {{link}}</h3>
-            </div>
-        </script>
+        <div id = "searchbardiv" class = "searchbardiv"></div>
+        <div id = "refinement-list"></div>
         <div  id = "hits"></div>
         <div id = "pagination"></div>
         <br>
@@ -44,11 +38,33 @@
                 <label for="description">Description:</label><br>
                 <input type="text" id="description" placeholder="Describe It." name="description">
                 <br>
-                <label for="link_entry">Link:</label><br>
-                <input type="text" id="link_entry" placeholder="Provide a Link...For Now" name="link_entry">
+
+                <div class = "choose-entry">
+                    <label class = "what-to-share">What Do You Want To Share?</label><br>
+                    <button onclick ="pasteLink()" type ="button" id = "paste-link" class="paste-link" onclick="search_mode()">Paste Link</button>
+                    <button onclick ="uploadFile()" type = "button" id ="upload-file" class = "upload-file" onclick="upload_mode()">Upload File</button>
+                </div>
+                <div id = "show-link">
+                    <input type="text" id="link_entry" placeholder="Provide a Link" name="link_entry">
+                </div>
+                <div id = "show-file">
+                    <input type="file" id="myFile" name="filename">
+                </div>
+                
+                <label for="option_tag">Tag:</label><br>
+                <select class = "tag-form" id = "tag-form">
+                    <option>Code Repositories</option>
+                    <option>News Articles</option>
+                    <option>Research & Trading Strategies</option>
+                    <option>SIF Related</option>
+                    <option>Random Stuff</option>
+                </select>
+                <button onclick= "dummyFunc()" type="button"> Click Me</button>
             </form>
+            
             <button type="submit" onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
         </div>
+        
 
         <div id = "upload_success" class = "upload_success">
             <div class = "style_upload">
@@ -61,5 +77,6 @@
         </div>  
     </div>
 </div>
+
 </body>
 </html>
