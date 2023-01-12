@@ -3,6 +3,6 @@ SIFSearch is a search engine designed for the Smith Investment Fund, a student-r
 <br/>
 As of now, a basic template of the application has been created. Users are limited to only uploading and searching for media in the form of links. This is Django-based application that uses Algolia's Search API to search for a desired entry.
 # SIFSearch Demo:
+https://user-images.githubusercontent.com/68911800/212112632-e38ecaef-ab72-4fc4-a003-30bf1e6d6e4f.mp4
 
-https://user-images.githubusercontent.com/68911800/212111818-81eafaf9-5469-483a-9850-88bedec26c9f.mp4
 
