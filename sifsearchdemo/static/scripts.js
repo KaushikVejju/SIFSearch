@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("pagination").style.display = "none";
 
   document.getElementById("searchbardiv").style.display = "none";
-  document.getElementById("upload_success").style.display = "none";
+  document.getElementById("upload-success").style.display = "none";
   document.getElementById("hits").style.display = "none";
   document.getElementById('refinement-list').style.display = "none";
 
@@ -103,12 +103,14 @@ function displayList() {
   document.getElementById("hits").style.display = "block";
 }
 
-function upload_mode() {
+function uploadMode() {
   document.getElementById("upload-form").reset();
   document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
-  let uploadDiv = document.getElementById('upload_div');
-  let uploadSuccess = document.getElementById('upload_success');
-  if (uploadDiv.style.display=='none' && uploadSuccess.style.display == 'none' ) {
+
+  let uploadDiv = document.getElementById('upload-div');
+  let uploadSuccess = document.getElementById('upload-success');
+  if (uploadDiv.style.display=='none' || uploadSuccess.style.display == 'none' ) {
+    pasteLink();
     document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
     document.getElementById("search-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
     uploadDiv.style.display = "block";
@@ -120,7 +122,7 @@ function upload_mode() {
   }
 }
 
-function search_mode() {
+function searchMode() {
   let searchbarDiv = document.getElementById('searchbardiv');
   let hits = document.getElementById('hits');
   let refinementList = document.getElementById('refinement-list');
@@ -131,22 +133,11 @@ function search_mode() {
     hits.style.display = "block";
     refinementList.style.display = "block";
     document.getElementById("pagination").style.display = "block";
-    document.getElementById("upload_div").style.display = "none";
-    document.getElementById("upload_success").style.display = "none";
+    document.getElementById("upload-div").style.display = "none";
+    document.getElementById("upload-success").style.display = "none";
   }
 }
  
-function dummyFunc() {
-  let imgList = document.getElementById("myFile");
-  let img = imgList.files[0];
-  let entry = {
-    name: "hello",
-    image: img,
-  }
-
-  console.log(JSON.stringify(entry))
-}
-
 function uploadFunction() {
   let upload_request = new XMLHttpRequest();
   const csrftoken = getCookie('csrftoken');
@@ -157,18 +148,18 @@ function uploadFunction() {
   let entry = {
     name: document.getElementById('title').value,
     description: document.getElementById('description').value,
-    link: document.getElementById('link_entry').value,
+    link: document.getElementById('link-entry').value,
     tag: document.getElementById("tag-form").value,
   }
   
   let formData = new FormData();
   formData.append('name', document.getElementById('title').value);
   formData.append('description', document.getElementById('description').value);
-  formData.append('link', document.getElementById('link_entry').value);
+  formData.append('link', document.getElementById('link-entry').value);
   formData.append('tag', document.getElementById('tag-form').value);
   console.log(document.getElementById("show-link").style.display !="none");
   if (document.getElementById("show-link").style.display !="none") {
-    formData.append('link', document.getElementById('link_entry').value);
+    formData.append('link', document.getElementById('link-entry').value);
     fetch(add_link_endpoint,{
       method:'POST',
       body: formData,
@@ -178,7 +169,7 @@ function uploadFunction() {
      })
     
       console.log("HIT API");
-      uploadSuccess(entry.name, entry.description,entry.link)
+      uploadSuccess(entry.name, entry.description)
   }
   else {
     formData.append('file',fileEntry);
@@ -191,42 +182,23 @@ function uploadFunction() {
      })
     
       console.log("HIT API");
-      uploadSuccess(entry.name, entry.description,entry.link)
+      uploadSuccess(entry.name, entry.description)
   }
-
-
-  /* search_entries.push(entry); */
   document.forms[0].reset();
-  /*  console.log(JSON.stringify(entry));  *//* debugging */
-  /* console.log(search_entries);*/ /* debugging, making sure that values have been added into the list */
-  /* make an api call */
-  /*
-  upload_request.open('POST', add_endpoint);
-  upload_request.setRequestHeader("Accept", "application/json");
-  upload_request.setRequestHeader("Content-Type", " multipart/form-data");
-  */
-  /*
-  upload_request.setRequestHeader("X-CSRFToken", csrftoken);
-  upload_request.send(formData);
-  */
-
-
-
 }
 
 
-function uploadSuccess(title,description,link) {
-  document.getElementById("upload_div").style.display = "none";
-  document.getElementById("upload_success").style.display = "block";
-  document.getElementById('link_success').href = link;
-  document.getElementById("title_success").innerHTML = title;
-  document.getElementById("descr_success").innerHTML = description
+function uploadSuccess(title,description) {
+  document.getElementById("upload-div").style.display = "none";
+  document.getElementById("upload-success").style.display = "block";
+  document.getElementById("title-success").innerHTML = title;
+  document.getElementById("descr-success").innerHTML = description
 
 }
 
 function goBack() {
-  document.getElementById("upload_success").style.display = "none";
-  document.getElementById("upload_div").style.display = "block";
+  document.getElementById("upload-success").style.display = "none";
+  document.getElementById("upload-div").style.display = "block";
   document.getElementById("upload-form").reset();
 
 }

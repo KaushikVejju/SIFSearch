@@ -20,37 +20,38 @@
     <div class = "welcomediv">
         <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i></h1>
         <div class = "option-div">
-            <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="upload_mode()">Upload</button>
-            <button id = "search-btn-mode" class="search-btn-mode" onclick="search_mode()">Search</button>
-
+            <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="uploadMode()">Upload</button>
+            <button id = "search-btn-mode" class="search-btn-mode" onclick="searchMode()">Search</button>
         </div>
+        <!--divs for InstantSearch.js materials-->
         <div id = "searchbardiv" class = "searchbardiv"></div>
         <div id = "refinement-list"></div>
         <div  id = "hits"></div>
         <div id = "pagination"></div>
         <br>
-        <div id = "upload_div" class = "upload_div">
+        <!--upload form-->
+        <div id = "upload-div" class = "upload-div">
             <br>
             <h3 class = "upload-title">Upload Something Cool.</i></i></h3>
             <form id = "upload-form"> 
-                <label for="title">Title:</label><br>
+                <label for="title">Name:</label><br>
                 <input type="text" id="title" placeholder="Call It Something." name="title"><br>
                 <label for="description">Description:</label><br>
                 <input type="text" id="description" placeholder="Describe It." name="description">
                 <br>
-
+                <!--Option for uploading a file or pasting a link-->
                 <div class = "choose-entry">
                     <label class = "what-to-share">What Do You Want To Share?</label><br>
                     <button onclick ="pasteLink()" type ="button" id = "paste-link" class="paste-link" onclick="search_mode()">Paste Link</button>
                     <button onclick ="uploadFile()" type = "button" id ="upload-file" class = "upload-file" onclick="upload_mode()">Upload File</button>
                 </div>
                 <div id = "show-link">
-                    <input type="text" id="link_entry" placeholder="Provide a Link" name="link_entry">
+                    <input type="text" id="link-entry" placeholder="Provide a Link" name="link-entry">
                 </div>
                 <div id = "show-file">
                     <input type="file" id="myFile" name="filename">
                 </div>
-                
+                <!--Selecting a tag-->
                 <label for="option_tag">Tag:</label><br>
                 <select class = "tag-form" id = "tag-form">
                     <option>Code Repositories</option>
@@ -59,24 +60,17 @@
                     <option>SIF Related</option>
                     <option>Random Stuff</option>
                 </select>
-                <button onclick= "dummyFunc()" type="button"> Click Me</button>
-            </form>
-            
+            </form>            
             <button type="submit" onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
         </div>
-        
-
-        <div id = "upload_success" class = "upload_success">
-            <div class = "style_upload">
+        <!--Shows upon successful upload -->
+        <div id = "upload-success" class = "upload-success">
             <h3 class = "nice-comment">Nice. You've uploaded something cool.</h3>
-            <b>Name of Entry: </b><p id = "title_success"></p> 
-            <b>Description:</b> <p id = "descr_success"></p>
-            <b>Link:</b>  <a id = "link_success" target="_blank" href="">Link to Media</a>
-            <br>
+            <b>Name of Entry: </b><p id = "title-success"></p> 
+            <b>Description:</b> <p id = "descr-success"></p>
             <button onclick="goBack()" class = "gobackbtn"> Upload More </button>
         </div>  
     </div>
 </div>
-
 </body>
 </html>

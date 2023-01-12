@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls), path('', views.sif_search_home),
-    path('addentrylink/',views.add_entry_link),
-    path('addentryfile/',views.add_entry_file)
+    path('addentrylink/',views.add_entry_link), # endpoint for uploading an entry with a link
+    path('addentryfile/',views.add_entry_file) # endpoint for uploading an entry with a file
 
 ]

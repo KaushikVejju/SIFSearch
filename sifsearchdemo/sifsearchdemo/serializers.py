@@ -1,16 +1,15 @@
-# going from a python object to JSON  
+'''
+There are two serializer classes: EntrySerializer and EntryFileSerializer. This is to handle
+the event that the user makes an entry that includes a link or one that includes a file.
+'''
 from rest_framework import serializers
 from .models import SearchEntry
 class EntrySerializer(serializers.ModelSerializer):
-    # define inner class called meta, which describes the meta data
-    # about the model
     class Meta:
         model = SearchEntry
         fields = ['name', 'description', 'link','tag']
 
 class EntryFileSerializer(serializers.ModelSerializer):
-    # define inner class called meta, which describes the meta data
-    # about the model
     class Meta:
         model = SearchEntry
         fields = ['name', 'description', 'file','tag']
