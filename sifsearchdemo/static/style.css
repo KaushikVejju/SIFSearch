@@ -136,6 +136,10 @@ body {
     width: 2.5em;
     margin-left:0.5em;
 }
+..ais-Hits--empty {
+    color: rgb(78, 40, 122);
+    text-align: center;
+}
 .searchbar {
     margin-right:-10px;
     border-radius: 0;
