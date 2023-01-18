@@ -121,6 +121,7 @@ body {
     height: 2.5em;
     width: 2.5em;
     margin-left:0.5em;
+    border: 2px solid #663bb0;
 
 }
 
@@ -129,12 +130,16 @@ body {
 
 }
 .ais-SearchBox-reset {
-    border-radius: 2.5px;
+    border: 2px solid #663bb0;
     color: rgb(39, 3, 3);
     background-color: rgb(255, 255, 255);
     height: 2.5em;
     width: 2.5em;
     margin-left:0.5em;
+}
+.ais-Hits--empty {
+    color: rgb(78, 40, 122);
+    text-align: center;
 }
 .searchbar {
     margin-right:-10px;
@@ -150,6 +155,9 @@ body {
     height: 2.45em;
 
 }
+p b {
+    color:#663bb0;
+}
 
 .sifsearchtitle {
     padding-top: 1em;
@@ -159,8 +167,7 @@ body {
     color: rgb(18, 0, 0);  
     text-align: center;
     overflow: hidden;
-    animation: 
-    typing 3.5s;
+    animation: typing 3.5s;
 }
 
 .upload-div {
