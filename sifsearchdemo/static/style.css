@@ -16,6 +16,7 @@ body {
 }
 .tag-form {
     border: 2px solid rgb(110, 64, 169);
+    border-radius: 5px;
 }
 
 #pagination{
@@ -68,13 +69,14 @@ body {
     border-radius: 5px;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
     padding-bottom: 3em;
+    
 
 }
 .option-div {
     text-align: center;
     margin-bottom: 0.2em;
 }
-.search-btn-mode,.upload-btn-mode{
+.search-btn-mode,.upload-btn-mode, #display-refin-btn{
     transition: transform .2s;
     font-size: 100%;
     padding:0.4em;
@@ -85,7 +87,7 @@ body {
    
     border-radius: 5px;
 }
-.search-btn-mode:hover{
+.search-btn-mode:hover, #display-refin-btn:hover{
     transform: scale(1.2);
 
 }
@@ -173,6 +175,7 @@ p b {
 .upload-div {
     border: 0.5px solid rgb(211, 211, 211);
     animation: fadein 1s;
+    
     border-radius: 5px;
     text-align: center;
     background-color: rgb(255, 255, 255);
@@ -180,7 +183,6 @@ p b {
     margin: 0 auto;
     position: relative;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
-    
     padding-bottom: 0.5em;
 }
 
@@ -210,8 +212,23 @@ p b {
     border: 2px solid rgb(110, 64, 169);
     padding: 0.2em
 }
+#display-refinement {
+    margin-top: -1em;
+    text-align: center;
+}
+#refin-btn {
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+}
+
+#refin-btn:hover {
+    background-color: #c5c5c5;
+}
 
 .ais-RefinementList-list {
+    animation: fadein 1s;
     padding-top: 0.5em;
     text-align: left;
     line-height: 2em;

@@ -25,7 +25,10 @@
         </div>
         <!--divs for InstantSearch.js materials-->
         <div id = "searchbardiv" class = "searchbardiv"></div>
-        <div id = "refinement-list"></div>
+        <div id = "display-refinement">
+            <button onclick = "showRefinementList()" id = "refin-btn" type = "button">Show Refinement List <i class="fa-solid fa-eye"></i></button>
+            <div id = "refinement-list"></div>
+        </div>
         <div  id = "hits"></div>
         <div id = "pagination"></div>
         <br>
@@ -42,8 +45,8 @@
                 <!--Option for uploading a file or pasting a link-->
                 <div class = "choose-entry">
                     <label class = "what-to-share">What Do You Want To Share?</label><br>
-                    <button onclick ="pasteLink()" type ="button" id = "paste-link" class="paste-link" onclick="search_mode()">Paste Link</button>
-                    <button onclick ="uploadFile()" type = "button" id ="upload-file" class = "upload-file" onclick="upload_mode()">Upload File</button>
+                    <button onclick ="pasteLink()" type ="button" id = "paste-link" class="paste-link" onclick="search_mode()">Paste Link <i class="fa-solid fa-link"></i></button>
+                    <button onclick ="uploadFile()" type = "button" id ="upload-file" class = "upload-file" onclick="upload_mode()">Upload File <i class="fa-solid fa-file"></i></button>
                 </div>
                 <div id = "show-link">
                     <input type="text" id="link-entry" placeholder="Provide a Link" name="link-entry">
@@ -65,9 +68,9 @@
                     <option>{{ t.tag }}</option>
                     {% endfor %}
                 </select>
-                <button onclick = "addTag()" type ="button" class = "add-tag-btn"> Add a Tag </button>
+                <button onclick = "addTag()" type ="button" class = "add-tag-btn"> Add a Tag <i class="fa-solid fa-tag"></i></button>
                 <div id = "add-tag">
-                    <input type="text" id="add-tag-input" placeholder="Add a Tag?" name="add-tag">
+                    <input type="text" id="add-tag-input" placeholder="Add a tag" name="add-tag">
                 </div>
 
             </form>            

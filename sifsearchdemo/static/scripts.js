@@ -51,6 +51,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("searchbardiv").style.display = "none";
   document.getElementById("upload-success").style.display = "none";
   document.getElementById("hits").style.display = "none";
+  document.getElementById('display-refinement').style.display = "none";
   document.getElementById('refinement-list').style.display = "none";
 
   document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
@@ -125,7 +126,7 @@ function uploadMode() {
     document.getElementById("searchbardiv").style.display = "none";
     document.getElementById("hits").style.display = "none";
     document.getElementById("pagination").style.display = "none";
-    document.getElementById('refinement-list').style.display = "none";
+    document.getElementById('display-refinement').style.display = "none";
 
   }
 }
@@ -133,7 +134,7 @@ function uploadMode() {
 function searchMode() {
   let searchbarDiv = document.getElementById('searchbardiv');
   let hits = document.getElementById('hits');
-  let refinementList = document.getElementById('refinement-list');
+  let refinementList = document.getElementById('display-refinement');
   if (searchbarDiv.style.display=='none' && hits.style.display == 'none' ) {
     document.getElementById("search-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
     document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
@@ -202,7 +203,18 @@ function uploadFunction() {
   document.forms[0].reset();
 }
 
+function showRefinementList() {
+  refinList = document.getElementById('refinement-list');
+  refinBtn = document.getElementById('refin-btn');
+  if (refinList.style.display == 'none') {
+    refinList.style.display ='block';
+    refinBtn.innerHTML = "Hide Refinement List <i class='fa-solid fa-eye-slash'></i>";
 
+  } else {
+    refinList.style.display ='none';
+    refinBtn.innerHTML = "Show Refinement List <i class='fa-solid fa-eye'>";
+  }
+}
 function uploadSuccess(title,description) {
   document.getElementById("upload-div").style.display = "none";
   document.getElementById("upload-success").style.display = "block";
