@@ -57,6 +57,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
 
   document.getElementById("show-file").style.display = "none";
+  document.getElementById("add-tag").style.display = "none";
 });
 function showMedia(link, file) {
   if (link=="") {
@@ -102,7 +103,14 @@ function openLink() {
 function displayList() {
   document.getElementById("hits").style.display = "block";
 }
-
+function addTag() {
+  addTagInput = document.getElementById("add-tag");
+  if (addTagInput.style.display == "none") {
+    addTagInput.style.display = "block"
+  } else {
+    addTagInput.style.display = "none"
+  }
+}
 function uploadMode() {
   document.getElementById("upload-form").reset();
   document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
@@ -144,19 +152,26 @@ function uploadFunction() {
 
   let fileList = document.getElementById("myFile");
   let fileEntry = fileList.files[0];
+  let tagValue = document.getElementById("tag-form").value
+  if (document.getElementById("add-tag").style.display != "none") {
+    console.log("yeat")
+    tagValue = document.getElementById("add-tag-input").value;
+  }
+  console.log(tagValue)
+
 
   let entry = {
     name: document.getElementById('title').value,
     description: document.getElementById('description').value,
     link: document.getElementById('link-entry').value,
-    tag: document.getElementById("tag-form").value,
+    tag: tagValue
   }
   
   let formData = new FormData();
   formData.append('name', document.getElementById('title').value);
   formData.append('description', document.getElementById('description').value);
   formData.append('link', document.getElementById('link-entry').value);
-  formData.append('tag', document.getElementById('tag-form').value);
+  formData.append('tag', tagValue);
   console.log(document.getElementById("show-link").style.display !="none");
   if (document.getElementById("show-link").style.display !="none") {
     formData.append('link', document.getElementById('link-entry').value);
@@ -197,6 +212,7 @@ function uploadSuccess(title,description) {
 }
 
 function goBack() {
+  window.location.reload(); 
   document.getElementById("upload-success").style.display = "none";
   document.getElementById("upload-div").style.display = "block";
   document.getElementById("upload-form").reset();

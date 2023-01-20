@@ -52,6 +52,7 @@
                     <input type="file" id="myFile" name="filename">
                 </div>
                 <!--Selecting a tag-->
+
                 <label for="option_tag">Tag:</label><br>
                 <select class = "tag-form" id = "tag-form">
                     <option>Code Repositories</option>
@@ -59,7 +60,16 @@
                     <option>Research & Trading Strategies</option>
                     <option>SIF Related</option>
                     <option>Random Stuff</option>
+                    <!-- html for adding a tag -->
+                    {% for t in currtags %}
+                    <option>{{ t.tag }}</option>
+                    {% endfor %}
                 </select>
+                <button onclick = "addTag()" type ="button" class = "add-tag-btn"> Add a Tag </button>
+                <div id = "add-tag">
+                    <input type="text" id="add-tag-input" placeholder="Add a Tag?" name="add-tag">
+                </div>
+
             </form>            
             <button type="submit" onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
         </div>
