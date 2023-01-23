@@ -1,4 +1,6 @@
-let search_entries = [];
+let search_entries = []; /* variable to store entries, not needed */
+
+/* API Endpoints */
 let add_link_endpoint = "http://127.0.0.1:8000/addentrylink/";
 let add_file_endpoint = "http://127.0.0.1:8000/addentryfile/";
 
@@ -10,6 +12,7 @@ const search = instantsearch({
 });
 
 
+/* Adding Widgets for InstantSearch.js */
 search.addWidget(
   instantsearch.widgets.searchBox({
     container:'#searchbardiv',
@@ -27,6 +30,7 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container:'#hits', 
     templates: {
+      /* Defining the template for a hit */
       item: 
       `<div class = "hit-item">
           <p class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
@@ -44,6 +48,8 @@ search.addWidgets([
 ])
 
 search.start();
+
+/* Some Conditions when the home page is loaded */
 window.addEventListener('DOMContentLoaded', (event) => {
   document.querySelector('.ais-SearchBox-input').placeholder = "Search Something Cool."
   document.getElementById("pagination").style.display = "none";
@@ -60,6 +66,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("show-file").style.display = "none";
   document.getElementById("add-tag").style.display = "none";
 });
+
+/* Function For Opening the Media for a Hit (different based on if it is a link or file) */
 function showMedia(link, file) {
   if (link=="") {
     window.open(file)
@@ -67,12 +75,16 @@ function showMedia(link, file) {
     window.open(link)
   }
 }
+
+/* Style changes when the user pastes a link */
 function pasteLink () {
   document.getElementById("upload-file").style.backgroundColor = "rgb(96, 72, 192)";
   document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
   document.getElementById("show-link").style.display = "block";
   document.getElementById("show-file").style.display = "none";
 }
+
+/* Style changes when the user uploads a file */
 function uploadFile () {
   document.getElementById("upload-file").style.backgroundColor = "rgb(74, 7, 103)";
   document.getElementById("paste-link").style.backgroundColor = "rgb(96, 72, 192)";
@@ -104,6 +116,7 @@ function openLink() {
 function displayList() {
   document.getElementById("hits").style.display = "block";
 }
+/* If user wants to enter a tag */
 function addTag() {
   addTagInput = document.getElementById("add-tag");
   if (addTagInput.style.display == "none") {
@@ -112,6 +125,7 @@ function addTag() {
     addTagInput.style.display = "none"
   }
 }
+/* Options for the upload mode */
 function uploadMode() {
   document.getElementById("upload-form").reset();
   document.getElementById("paste-link").style.backgroundColor = "rgb(74, 7, 103)";
@@ -131,6 +145,7 @@ function uploadMode() {
   }
 }
 
+/* Options for the search mode */
 function searchMode() {
   let searchbarDiv = document.getElementById('searchbardiv');
   let hits = document.getElementById('hits');
@@ -147,6 +162,7 @@ function searchMode() {
   }
 }
  
+/* Function that makes REST API call */
 function uploadFunction() {
   let upload_request = new XMLHttpRequest();
   const csrftoken = getCookie('csrftoken');
@@ -160,7 +176,8 @@ function uploadFunction() {
   }
   console.log(tagValue)
 
-
+  /* Two different API calls: link or file */
+  /* entry object defined below is not really needed */
   let entry = {
     name: document.getElementById('title').value,
     description: document.getElementById('description').value,
@@ -203,6 +220,7 @@ function uploadFunction() {
   document.forms[0].reset();
 }
 
+/* Showing the Refinement List Options */
 function showRefinementList() {
   refinList = document.getElementById('refinement-list');
   refinBtn = document.getElementById('refin-btn');

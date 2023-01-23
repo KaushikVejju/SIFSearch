@@ -18,7 +18,8 @@
     <br>
     <br>
     <div class = "welcomediv">
-        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i></h1>
+        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i>, <b class="user-name">{{ request.user.username }}</b>
+        </h1>
         <div class = "option-div">
             <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="uploadMode()">Upload</button>
             <button id = "search-btn-mode" class="search-btn-mode" onclick="searchMode()">Search</button>
