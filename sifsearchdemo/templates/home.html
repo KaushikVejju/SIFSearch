@@ -14,11 +14,12 @@
     <script src="{% static 'scripts.js' %}" defer></script>
 </head>
 <body>
+    <button type="button" onclick="changeMode()" id="dark-light-btn"><i class="fa-solid fa-moon"></i></button>
     <div class = "main">
     <br>
     <br>
     <div class = "welcomediv">
-        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i>, <b class="user-name">{{ request.user.username }}</b>
+        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i>
         </h1>
         <div class = "option-div">
             <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="uploadMode()">Upload</button>

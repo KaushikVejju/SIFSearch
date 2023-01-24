@@ -51,6 +51,7 @@ search.start();
 
 /* Some Conditions when the home page is loaded */
 window.addEventListener('DOMContentLoaded', (event) => {
+  document.documentElement.setAttribute('data-theme', "light")
   document.querySelector('.ais-SearchBox-input').placeholder = "Search Something Cool."
   document.getElementById("pagination").style.display = "none";
 
@@ -66,6 +67,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("show-file").style.display = "none";
   document.getElementById("add-tag").style.display = "none";
 });
+
+function changeMode() {
+  let theme= document.documentElement.getAttribute('data-theme');
+  let btnText = document.getElementById("dark-light-btn").innerHTML;
+  if (theme == "dark") {
+    document.documentElement.setAttribute('data-theme', "light");
+    document.getElementById("dark-light-btn").innerHTML = "<i class='fa-solid fa-moon'></i>"
+
+  } else {
+    document.documentElement.setAttribute('data-theme', "dark");
+    document.getElementById("dark-light-btn").innerHTML = "<i class='fa-solid fa-sun'></i>"
+
+  }
+}
 
 /* Function For Opening the Media for a Hit (different based on if it is a link or file) */
 function showMedia(link, file) {
@@ -242,7 +257,6 @@ function uploadSuccess(title,description) {
 }
 
 function goBack() {
-  window.location.reload(); 
   document.getElementById("upload-success").style.display = "none";
   document.getElementById("upload-div").style.display = "block";
   document.getElementById("upload-form").reset();
