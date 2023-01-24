@@ -29,11 +29,6 @@
     --refin-list-background: #ededed;
     --refin-list-text: black;
     --refin-hover: #c5c5c5;
-
-
-
-
-
 }
 html[data-theme="light"] {
     
@@ -47,7 +42,7 @@ html[data-theme="light"] {
     --welcome-div-color: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);
     --sif-search-text: black;
     --sif-main-title: -webkit-linear-gradient(rgb(183, 154, 223), rgb(61, 27, 109));
-    --mag-class-color:  -webkit-linear-gradient(rgb(123, 123, 123), rgb(17, 17, 17));
+    --mag-class-color:  -webkit-linear-gradient(rgb(123, W123, 123), rgb(17, 17, 17));
     --refin-btn-color:  rgb(211, 211, 211);
     --refin-text-color: black;
     --p-b-color: #663bb0;
@@ -466,3 +461,4 @@ p b {
       opacity: 1;
     }
 }
+
