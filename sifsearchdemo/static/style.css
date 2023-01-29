@@ -1,9 +1,4 @@
 /* Body CSS*/
-
-
-
-
-
 /* Light Mode & Dark Mode CSS */
 :root {
     --html-bg-color:  #4b2a85; /* needs to be in dark mode */
@@ -42,7 +37,7 @@ html[data-theme="light"] {
     --welcome-div-color: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);
     --sif-search-text: black;
     --sif-main-title: -webkit-linear-gradient(rgb(183, 154, 223), rgb(61, 27, 109));
-    --mag-class-color:  -webkit-linear-gradient(rgb(123, W123, 123), rgb(17, 17, 17));
+    --mag-class-color:  -webkit-linear-gradient(rgb(123, 123, 123), rgb(17, 17, 17));
     --refin-btn-color:  rgb(211, 211, 211);
     --refin-text-color: black;
     --p-b-color: #663bb0;
@@ -159,7 +154,7 @@ body {
     text-align: center;
     margin-bottom: 0.2em;
 }
-.search-btn-mode,.upload-btn-mode, #display-refin-btn{
+.search-btn-mode,.upload-btn-mode, #display-refin-btn, .modal-content button {
     transition: transform .2s;
     font-size: 100%;
     padding:0.4em;
@@ -170,7 +165,7 @@ body {
     width: 20%;
     border-radius: 5px;
 }
-.search-btn-mode:hover, #display-refin-btn:hover{
+.search-btn-mode:hover, #display-refin-btn:hover, .modal-content button:hover {
     transform: scale(1.2);
 
 }
@@ -309,6 +304,8 @@ p b {
     color: var(--refin-text-color);
 }
 
+
+
 #refin-btn:hover {
     background-color: var(--refin-hover);
 }
@@ -443,10 +440,55 @@ p b {
 
 }
 
+.edit-btn {
+    color: red;
+}
+
 .view-media:hover{
     transform: scale(1.2);
 }
 
+/* Modal */
+/* The Modal (background) */
+.modal {
+    animation: fadein 1s;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content COPIED FROM W3 SCHOOLS LOL*/ 
+  .modal-content {
+    margin: auto;
+    padding: 20px;
+    border: 2px solid rgb(158, 158, 158);
+    border-radius: 5px;
+    width: 50%;
+    background-color: var(--upload-form-color);
+    color: var(--tag-form-text);
+    text-align: center;
+  }
+
+  .modal-content input {
+    padding: 0.5em;
+    border: none;
+    border-bottom: 3px solid rgb(110, 64, 169);
+    width: 60%;
+    background-color: var(--search-input);
+    color: var(--search-input-text);
+  }
+
+
+  
+ 
 /* Animations */
 @keyframes typing {
     from { width: 0 }

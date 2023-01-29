@@ -28,7 +28,10 @@ def add_entry_link(request):
             try:
                 tag_n = Tag.objects.get(tag=tag_name)
             except ObjectDoesNotExist:
-                tag_serializer.save()
+                if (tag_name != "Code Repositories" and tag_name != "News Articles" and 
+                    tag_name != "Research & Trading Strategies" and tag_name != "Random Stuff"
+                    and tag_name != "SIF Related"):
+                    tag_serializer.save()
         algoliasearch.reindex_all(SearchEntry,) 
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -36,8 +39,32 @@ def add_entry_link(request):
 @api_view(['POST'])
 def add_entry_file(request):
     serializer = EntryFileSerializer(data=request.data)
+    tag_serializer = TagSerializer(data=request.data)
+    tag_name = request.POST.get('tag')
+
     if serializer.is_valid():
         serializer.save()
+        if tag_serializer.is_valid():
+            try:
+                tag_n = Tag.objects.get(tag=tag_name)
+            # make sure that the tag the user added is not one of the original tags (i need to change this code)
+            except ObjectDoesNotExist:
+                if (tag_name != "Code Repositories" and tag_name != "News Articles" and 
+                    tag_name != "Research & Trading Strategies" and tag_name != "Random Stuff"
+                    and tag_name != "SIF Related"):
+                    tag_serializer.save()
         algoliasearch.reindex_all(SearchEntry,) 
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+# This function is invoked when the user updates an entry
+@api_view(['PUT'])
+def update_entry(request):
+    entry_name = request.POST.get('name')
+    entry_obj = SearchEntry.objects.get(name=entry_name) # search for the original entry using the name
+    # modify the name and description
+    entry_obj.name = request.POST.get('new-name')
+    entry_obj.description = request.POST.get('new-description')
+    entry_obj.save() # saving the changes
+
+    return Response(status=status.HTTP_201_CREATED)
 
