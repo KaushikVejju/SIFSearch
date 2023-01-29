@@ -14,18 +14,23 @@
     <script src="{% static 'scripts.js' %}" defer></script>
 </head>
 <body>
+    <button type="button" onclick="changeMode()" id="dark-light-btn"><i class="fa-solid fa-moon"></i></button>
     <div class = "main">
     <br>
     <br>
     <div class = "welcomediv">
-        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i></h1>
+        <h1 class = "sifsearchtitle"> Welcome To <b class = main-title>SIFSearch</b><i id = "mag-glass" class="fa-solid fa-magnifying-glass"></i>
+        </h1>
         <div class = "option-div">
             <button id ="upload-btn-mode" class = "upload-btn-mode" onclick="uploadMode()">Upload</button>
             <button id = "search-btn-mode" class="search-btn-mode" onclick="searchMode()">Search</button>
         </div>
         <!--divs for InstantSearch.js materials-->
         <div id = "searchbardiv" class = "searchbardiv"></div>
-        <div id = "refinement-list"></div>
+        <div id = "display-refinement">
+            <button onclick = "showRefinementList()" id = "refin-btn" type = "button">Show Refinement List <i class="fa-solid fa-eye"></i></button>
+            <div id = "refinement-list"></div>
+        </div>
         <div  id = "hits"></div>
         <div id = "pagination"></div>
         <br>
@@ -42,8 +47,8 @@
                 <!--Option for uploading a file or pasting a link-->
                 <div class = "choose-entry">
                     <label class = "what-to-share">What Do You Want To Share?</label><br>
-                    <button onclick ="pasteLink()" type ="button" id = "paste-link" class="paste-link" onclick="search_mode()">Paste Link</button>
-                    <button onclick ="uploadFile()" type = "button" id ="upload-file" class = "upload-file" onclick="upload_mode()">Upload File</button>
+                    <button onclick ="pasteLink()" type ="button" id = "paste-link" class="paste-link" onclick="search_mode()">Paste Link <i class="fa-solid fa-link"></i></button>
+                    <button onclick ="uploadFile()" type = "button" id ="upload-file" class = "upload-file" onclick="upload_mode()">Upload File <i class="fa-solid fa-file"></i></button>
                 </div>
                 <div id = "show-link">
                     <input type="text" id="link-entry" placeholder="Provide a Link" name="link-entry">
@@ -52,6 +57,7 @@
                     <input type="file" id="myFile" name="filename">
                 </div>
                 <!--Selecting a tag-->
+
                 <label for="option_tag">Tag:</label><br>
                 <select class = "tag-form" id = "tag-form">
                     <option>Code Repositories</option>
@@ -59,7 +65,16 @@
                     <option>Research & Trading Strategies</option>
                     <option>SIF Related</option>
                     <option>Random Stuff</option>
+                    <!-- html for adding a tag -->
+                    {% for t in currtags %}
+                    <option>{{ t.tag }}</option>
+                    {% endfor %}
                 </select>
+                <button onclick = "addTag()" type ="button" class = "add-tag-btn"> Add a Tag <i class="fa-solid fa-tag"></i></button>
+                <div id = "add-tag">
+                    <input type="text" id="add-tag-input" placeholder="Add a tag" name="add-tag">
+                </div>
+
             </form>            
             <button type="submit" onclick="uploadFunction()" class = "uploadbutton"><i class="fa-solid fa-upload"></i></button>
         </div>
@@ -71,6 +86,20 @@
             <button onclick="goBack()" class = "gobackbtn"> Upload More </button>
         </div>  
     </div>
+</div>
+<!-- Creating a Modal For Editing-->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div>
+        </div>
+      <label for="title">Name:</label><br>
+      <input type="text" id="new-title" placeholder="New Name" name="new-title"><br>
+      <label for="description">Description:</label><br>
+      <input type="text" id="new-description" placeholder="New Description" name="new-description">
+      <br>
+      <button type="button" id= "modal-btn" class = "modal-btn"> Update </button>
+</div>
 </div>
 </body>
 </html>

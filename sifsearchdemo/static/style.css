@@ -1,12 +1,86 @@
 /* Body CSS*/
-html {
-    background: linear-gradient(to bottom,#4b2a85 0%, #9999ff 100%);
-    height: 200%;
-    width: 100%;
+/* Light Mode & Dark Mode CSS */
+:root {
+    --html-bg-color:  #4b2a85; /* needs to be in dark mode */
+    --tag-form-border: rgb(110, 64, 169);
+    --pagination-text-color: rgb(43, 13, 86); /* needs a dark mode */
+    --pagination-color: white; /* needs a dark mode */
+    --search-upload-refine-btn-color: rgb(96, 72, 192);
+    --hit-item-color: white; /* needs a dark mode */
+    --hit-item-text: black; /* needs a dark mode */
+    --welcome-div-color: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);
+    --sif-search-text: black;
+    --sif-main-title: -webkit-linear-gradient(rgb(183, 154, 223), rgb(61, 27, 109));
+    --mag-class-color:  -webkit-linear-gradient(rgb(123, 123, 123), rgb(17, 17, 17));
+    --refin-btn-color:  rgb(211, 211, 211);
+    --refin-text-color: black;
+    --p-b-color: #663bb0;
+    --search-input: rgb(238, 238, 238);
+    --search-input-text: black;
+    --upload-form-color:  rgb(255, 255, 255);
+    --upload-text: black;
+    --tag-form-color: white;
+    --tag-form-text: black;
+    --refin-list-background: #ededed;
+    --refin-list-text: black;
+    --refin-hover: #c5c5c5;
+}
+html[data-theme="light"] {
+    
+    --html-bg-color:  #4b2a85; /* needs to be in dark mode */
+    --tag-form-border: rgb(110, 64, 169);
+    --pagination-text-color: rgb(43, 13, 86); /* needs a dark mode */
+    --pagination-color: white; /* needs a dark mode */
+    --search-upload-refine-btn-color: rgb(96, 72, 192);
+    --hit-item-color: white; /* needs a dark mode */
+    --hit-item-text: black; /* needs a dark mode */
+    --welcome-div-color: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);
+    --sif-search-text: black;
+    --sif-main-title: -webkit-linear-gradient(rgb(183, 154, 223), rgb(61, 27, 109));
+    --mag-class-color:  -webkit-linear-gradient(rgb(123, 123, 123), rgb(17, 17, 17));
+    --refin-btn-color:  rgb(211, 211, 211);
+    --refin-text-color: black;
+    --p-b-color: #663bb0;
+    --search-input: rgb(238, 238, 238);
+    --search-input-text: black;
+    --upload-form-color:  rgb(255, 255, 255);
+    --upload-text: black;
+    --tag-form-color: white;
+    --tag-form-text: black;
+    --refin-list-background: #ededed;
+    --refin-list-text: black;
+    --refin-hover: #c5c5c5;
+
 
 }
-body {
+html[data-theme='dark'] {
+    --html-bg-color:  #1e1d1f; /* needs to be in dark mode */
+    --pagination-text-color: rgb(255, 255, 255); /* needs a dark mode */
+    --pagination-color: rgb(50, 51, 54); /* needs a dark mode */
+    --hit-item-color: rgb(43, 42, 42); /* needs a dark mode */
+    --hit-item-text: rgb(255, 255, 255); /* needs a dark mode */
+    --welcome-div-color: linear-gradient(to bottom,#383838 0%, #353535 100%);
+    --sif-search-text: white;
+    --sif-main-title: -webkit-linear-gradient(rgb(183, 154, 223), rgb(125, 131, 221));
+    --mag-class-color:  -webkit-linear-gradient(rgb(101, 36, 190), rgb(125, 131, 221));
+    --refin-btn-color: rgb(10, 10, 10);
+    --refin-text-color: rgb(211, 211, 211);
+    --p-b-color: #9572d1;
+    --search-input: rgb(27, 27, 27);
+    --search-input-text: rgb(205, 204, 236);
+    --upload-form-color:  rgb(43, 42, 42);
+    --upload-text: white;
+    --tag-form-color: rgb(27, 27, 27);
+    --tag-form-text: white;
+    --refin-list-background: #2b2b2b;
+    --refin-list-text: rgb(255, 255, 255);
+    --refin-hover: #222222;
 
+
+}
+
+body {
+    background-color: var(--html-bg-color);
     animation: fadein 1s;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -15,7 +89,10 @@ body {
     text-align: left;
 }
 .tag-form {
-    border: 2px solid rgb(110, 64, 169);
+    border: 2px solid var(--tag-form-border);
+    border-radius: 5px;
+    background-color: var(--tag-form-color);
+    color: var(--tag-form-text);
 }
 
 #pagination{
@@ -35,25 +112,27 @@ body {
 
 #pagination li {
     text-align: center;
-    color: rgb(43, 13, 86);
+    color: var(--pagination-text-color);
     padding: 0.5em;
     display: inline-flex;
     text-decoration: none;
     border:1px solid rgb(183, 183, 183);
-    background: white;
+    background: var(--pagination-color);
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);    
 
 }
 
-
 .main-title {
-    background: -webkit-linear-gradient(rgb(183, 154, 223), rgb(61, 27, 109));
+    background: var(--sif-main-title);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.user-name {
+    color:#603c9e;
+}
 #mag-glass {
-    background: -webkit-linear-gradient(rgb(123, 123, 123), rgb(17, 17, 17));
+    background: var(--mag-class-color);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -64,28 +143,29 @@ body {
     margin: 0 auto;
 
     width: 65%;
-    background: linear-gradient(to bottom,#ffffff 0%, #eeeeee 100%);
+    background: var(--welcome-div-color); 
     border-radius: 5px;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
     padding-bottom: 3em;
+    
 
 }
 .option-div {
     text-align: center;
     margin-bottom: 0.2em;
 }
-.search-btn-mode,.upload-btn-mode {
+.search-btn-mode,.upload-btn-mode, #display-refin-btn, .modal-content button {
     transition: transform .2s;
     font-size: 100%;
     padding:0.4em;
     margin:0.2em;
-    background-color: rgb(96, 72, 192);
+    background-color: var(--search-upload-refine-btn-color);
     color: white;
     border: 1px solid rgb(233, 233, 233);
-   
+    width: 20%;
     border-radius: 5px;
 }
-.search-btn-mode:hover{
+.search-btn-mode:hover, #display-refin-btn:hover, .modal-content button:hover {
     transform: scale(1.2);
 
 }
@@ -106,7 +186,8 @@ body {
     border-bottom: 3px solid rgb(110, 64, 169);
     width: 60%;
     height: 2.5em;
-    background-color: rgb(238, 238, 238);
+    background-color: var(--search-input);
+    color: var(--search-input-text);
 
     
 }
@@ -121,6 +202,7 @@ body {
     height: 2.5em;
     width: 2.5em;
     margin-left:0.5em;
+    border: 2px solid #663bb0;
 
 }
 
@@ -129,14 +211,14 @@ body {
 
 }
 .ais-SearchBox-reset {
-    border-radius: 2.5px;
+    border: 2px solid #663bb0;
     color: rgb(39, 3, 3);
     background-color: rgb(255, 255, 255);
     height: 2.5em;
     width: 2.5em;
     margin-left:0.5em;
 }
-..ais-Hits--empty {
+.ais-Hits--empty {
     color: rgb(78, 40, 122);
     text-align: center;
 }
@@ -154,37 +236,39 @@ body {
     height: 2.45em;
 
 }
+p b {
+    color: var(--p-b-color);
+}
 
 .sifsearchtitle {
     padding-top: 1em;
     padding-bottom: 0.5em;
     white-space: nowrap;
     margin: 0 auto;
-    color: rgb(18, 0, 0);  
+    color: var(--sif-search-text);  
     text-align: center;
     overflow: hidden;
-    animation: 
-    typing 3.5s;
+    animation: typing 3.5s;
 }
 
 .upload-div {
     border: 0.5px solid rgb(211, 211, 211);
     animation: fadein 1s;
+    color: var(--upload-text);
     border-radius: 5px;
     text-align: center;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--upload-form-color);
     width: 60%;
     margin: 0 auto;
     position: relative;
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
-    
     padding-bottom: 0.5em;
 }
 
 .choose-entry {
     margin-top: 0.5em;
 }
-.paste-link, .upload-file {
+.paste-link, .upload-file, .add-tag-btn  {
     margin-top: 0.5em;
     background: rgb(96, 72, 192);
     padding: 0.4em;
@@ -193,11 +277,11 @@ body {
     border: none;
     transition: transform .2s;
 }
-.paste-link:hover, .upload-file:hover {
+.paste-link:hover, .upload-file:hover, .add-tag-btn:hover {
     transform: scale(1.2);
 
 }
-#show-link, #show-file {
+#show-link, #show-file, #add-tag {
     margin-top:0.5em;
     animation: fadein 1s;
 }
@@ -207,15 +291,35 @@ body {
     border: 2px solid rgb(110, 64, 169);
     padding: 0.2em
 }
+#display-refinement {
+    margin-top: -1em;
+    text-align: center;
+}
+#refin-btn {
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+    background: var(--refin-btn-color);
+    color: var(--refin-text-color);
+}
+
+
+
+#refin-btn:hover {
+    background-color: var(--refin-hover);
+}
 
 .ais-RefinementList-list {
+    animation: fadein 1s;
     padding-top: 0.5em;
     text-align: left;
     line-height: 2em;
     list-style-type: none;
     width: 50%;
     margin: 0 auto;
-    background-color: #ededed;
+    background-color: var(--refin-list-background);
+    color: var(--refin-list-text);
     padding-bottom: 1em;
     border: none;
     border-top: 3px solid rgb(110, 64, 169);
@@ -230,7 +334,8 @@ body {
 .upload-div input {
     border: none;
     border-bottom: 3px solid rgb(110, 64, 169);
-    background-color: rgb(234, 234, 234);
+    background-color: var(--search-input);
+    color: var(--search-input-text);
     width: 40%;
 
 }
@@ -248,11 +353,11 @@ body {
 
 }
 .nice-comment {
-    color:rgb(96, 72, 192);
+    color:var(--p-b-color);
 
 }
 .upload-title {
-    color:rgb(96, 72, 192);
+    color:var(--p-b-color);
 }
 /* upload success styling */
 .upload-success {
@@ -264,7 +369,8 @@ body {
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
     padding: 1em;
     margin: 0 auto;
-    background-color: rgb(255, 255, 255);
+    background-color:var(--upload-form-color);
+    color: var(--upload-text);
     width: 60%;
     padding-bottom: 0.5em;
 }
@@ -309,7 +415,8 @@ body {
 /* search item */
 .hit-item{
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--hit-item-color);
+    color: var(--hit-item-text);
     box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.05);
     border: 2px solid rgb(181, 181, 181);
     padding:0.5em;
@@ -317,9 +424,9 @@ body {
     width: 50%;
     margin-bottom: 1em;
     text-align: center;
-   
-
-
+}
+.ais-Hits-item::marker {
+    color: var(--hit-item-text);
 }
 
 .view-media {
@@ -333,10 +440,55 @@ body {
 
 }
 
+.edit-btn {
+    color: red;
+}
+
 .view-media:hover{
     transform: scale(1.2);
 }
 
+/* Modal */
+/* The Modal (background) */
+.modal {
+    animation: fadein 1s;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content COPIED FROM W3 SCHOOLS LOL*/ 
+  .modal-content {
+    margin: auto;
+    padding: 20px;
+    border: 2px solid rgb(158, 158, 158);
+    border-radius: 5px;
+    width: 50%;
+    background-color: var(--upload-form-color);
+    color: var(--tag-form-text);
+    text-align: center;
+  }
+
+  .modal-content input {
+    padding: 0.5em;
+    border: none;
+    border-bottom: 3px solid rgb(110, 64, 169);
+    width: 60%;
+    background-color: var(--search-input);
+    color: var(--search-input-text);
+  }
+
+
+  
+ 
 /* Animations */
 @keyframes typing {
     from { width: 0 }
@@ -351,3 +503,4 @@ body {
       opacity: 1;
     }
 }
+
