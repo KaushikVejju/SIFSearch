@@ -286,12 +286,15 @@ let currHit = null; /* keeps track of the search entry/hut we want to edit */
 
 /* function for opening the update modal */
 function openUpdate(btn) {
+  /* need to revise the name entry when the highlight comes in */
   nameEntry = btn.parentElement.querySelector('#testing').innerHTML.replace("<b>Name: </b>","");
+  nameEntry = nameEntry.replace("<mark>", "");
+  nameEntry = nameEntry.replace("</mark>", "");
   currHit = btn.parentElement;
   console.log(nameEntry);
   let descriptionEntry = btn.parentElement.querySelector('#descript').innerHTML.replace("<b>Description: </b>","");
-  console.log(nameEntry);
-  console.log(descriptionEntry);
+  descriptionEntry = descriptionEntry.replace("<mark>", "");
+  descriptionEntry = descriptionEntry.replace("</mark>", "");
   document.getElementById("new-title").value = nameEntry;
   document.getElementById("new-description").value = descriptionEntry;
   modal.style.display = "block";
