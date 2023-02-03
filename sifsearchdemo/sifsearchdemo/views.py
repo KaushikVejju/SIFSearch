@@ -12,6 +12,7 @@ import algoliasearch_django as algoliasearch
 
 def sif_search_home(request):
     currtags = Tag.objects.all().values()
+    algoliasearch.reindex_all(SearchEntry,) 
     return render(request, 'home.html', {'currtags':currtags})
 
 # This function is invoked when the user uploads an entry that contains a link.
@@ -66,5 +67,13 @@ def update_entry(request):
     entry_obj.description = request.POST.get('new-description')
     entry_obj.save() # saving the changes
 
+    return Response(status=status.HTTP_201_CREATED)
+
+
+# function for deleting a SearchEntry
+@api_view(['DELETE'])
+def delete_entry(request):
+    entry_name = request.POST.get('name')
+    SearchEntry.objects.filter(name = entry_name).delete()
     return Response(status=status.HTTP_201_CREATED)
 
