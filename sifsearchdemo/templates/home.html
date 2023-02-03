@@ -91,15 +91,27 @@
 <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-        <div>
-        </div>
       <label for="title">Name:</label><br>
       <input type="text" id="new-title" placeholder="New Name" name="new-title"><br>
       <label for="description">Description:</label><br>
       <input type="text" id="new-description" placeholder="New Description" name="new-description">
       <br>
       <button type="button" id= "modal-btn" class = "modal-btn"> Update </button>
+      </div>
 </div>
+
+<!-- delete modal -->
+<div id="delete-modal" class="delete-modal">
+    <!-- delete modal content -->
+    <div class="delete-modal-content">
+        Are you sure you want to delete this?
+        <button id = "yes-delete"> Yes </button> <button id="no-delete" type = "button" onclick="closeDelete()"> No</button>
+    </div>
 </div>
+
+
+
+</div>
+
 </body>
 </html>

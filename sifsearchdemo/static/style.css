@@ -414,6 +414,7 @@ p b {
 }
 /* search item */
 .hit-item{
+    position: relative;
     margin: 0 auto;
     background-color: var(--hit-item-color);
     color: var(--hit-item-text);
@@ -421,12 +422,12 @@ p b {
     border: 2px solid rgb(181, 181, 181);
     padding:0.5em;
     line-height: 1em;
-    width: 50%;
+    width: 60%;
     margin-bottom: 1em;
     text-align: center;
 }
 .ais-Hits-item::marker {
-    color: var(--hit-item-text);
+    color: transparent;
 }
 
 .view-media {
@@ -450,7 +451,7 @@ p b {
 
 /* Modal */
 /* The Modal (background) */
-.modal {
+.modal, .delete-modal {
     animation: fadein 1s;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -466,7 +467,7 @@ p b {
   }
   
   /* Modal Content COPIED FROM W3 SCHOOLS LOL*/ 
-  .modal-content {
+  .modal-content, .delete-modal-content {
     margin: auto;
     padding: 20px;
     border: 2px solid rgb(158, 158, 158);
@@ -486,6 +487,16 @@ p b {
     color: var(--search-input-text);
   }
 
+
+#delete-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    color:rgb(71, 54, 140);
+    padding: 0.5em;
+}
 
   
  

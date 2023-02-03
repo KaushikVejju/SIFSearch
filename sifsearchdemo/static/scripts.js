@@ -1,9 +1,12 @@
 let search_entries = []; /* variable to store entries, not needed */
 
 /* API Endpoints */
-let add_link_endpoint = "http://127.0.0.1:8000/addentrylink/";
-let add_file_endpoint = "http://127.0.0.1:8000/addentryfile/";
-let update_endpoint = "http://127.0.0.1:8000/update/";
+const hostName = location.hostname;
+const port = location.port;
+let add_link_endpoint = `http://${hostName}:${port}/addentrylink/`;
+let add_file_endpoint = `http://${hostName}:${port}/addentryfile/`;
+let update_endpoint =`http://${hostName}:${port}/update/`;
+let delete_endpoint = `http://${hostName}:${port}/delete/`
 
 /* instant search config */
 const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
@@ -36,7 +39,9 @@ search.addWidgets([
     templates: {
       item: 
       `<div class = "hit-item">
-          <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i> </button>
+          <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          <button id = "delete-btn" type="button" onclick="openDelete(this)"><i class="fa-solid fa-trash"></i>
+          </button>
           <p id = "testing" class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
           <p id = "descript"><b>Description: </b>{{{_highlightResult.description.value}}}</p>
           <button onclick="showMedia('{{link}}', '{{file}}')" class = "view-media"> View Media </button>
@@ -217,6 +222,8 @@ function uploadFunction() {
       the paste link  div is visible, then we will be sending that request */
     if (document.getElementById("show-link").style.display !="none") {
       formData.append('link', document.getElementById('link-entry').value);
+
+      /* TO-DO: implement error handling */
       fetch(add_link_endpoint,{
         method:'POST',
         body: formData,
@@ -324,8 +331,47 @@ modalBtn.addEventListener("click", function() {
 })
 
 /* If we click outside the range of the Edit Modal, it should close */
+
+
+/* Deleting an Entry Code */
+let deleteNameEntry = "";
+let currDeleteHit = null;
+var deleteModal = document.getElementById("delete-modal");
+function openDelete(btn) {
+  deleteNameEntry = btn.parentElement.querySelector('#testing').innerHTML.replace("<b>Name: </b>","");
+  console.log(deleteNameEntry)
+  deleteNameEntry = deleteNameEntry.replace("<mark>", "");
+  deleteNameEntry = deleteNameEntry.replace("</mark>", "");
+  console.log(deleteNameEntry)
+  currDeleteHit = btn.parentElement;
+  deleteModal.style.display = "block";
+}
+
+function closeDelete() {
+  deleteModal.style.display = "none";
+}
+
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+  if (event.target == deleteModal) {
+    deleteModal.style.display = "none";
+  }
 }
+
+document.getElementById("yes-delete").addEventListener("click", function() {
+  let formData = new FormData();
+  formData.append('name', deleteNameEntry);
+  const csrftoken = getCookie('csrftoken');
+  fetch(delete_endpoint,{
+    method:'DELETE', /* Note this is a PUT request */
+    body: formData,
+    headers: {
+      'X-CSRFToken':csrftoken, /* is this needed for production? */
+    }
+  })
+  currDeleteHit.style.display = "none";
+  deleteModal.style.display = "none";
+
+})
