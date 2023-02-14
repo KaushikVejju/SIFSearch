@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-*n#7@$5r6_&qpc5dtnnh@udsy!+-mlpub=!mtfsn-dj_jp)%8$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 ALGOLIA = {
     'APPLICATION_ID': 'MAPEN2F6CS',
@@ -46,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'sifsearchdemo',
-    'algoliasearch_django'
+    'algoliasearch_django',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [

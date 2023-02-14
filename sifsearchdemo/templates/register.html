@@ -1,0 +1,30 @@
+{% block content %} 
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" />
+    <link rel= "stylesheet" href = "{% static 'style.css'%}">
+    <link rel = "shortcut icon" type = "image/png" href = "static/favicon.png">
+
+</head>
+
+<!--Register--> 
+<div id="register-div">
+	<h1 style="color:white; text-align:center; margin-top: 1em;">Register</h1>
+    <p style="color: white; text-align:center">Hop on the wave and change your life.</p>
+    <br>
+	<form method="POST">
+		{% csrf_token %}
+        <div id ="register-form">
+            {{ register_form|crispy }}                    
+            <button class="btn btn-primary" type="submit">Register</button>
+        </div>
+	</form>
+	<p style = "color:white" class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+</div>
+
+{% endblock %}
