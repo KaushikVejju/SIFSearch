@@ -7,12 +7,12 @@ from .models import SearchEntry,Tag
 class EntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = SearchEntry
-        fields = ['name', 'description', 'link','tag']
+        fields = ['name', 'description', 'link','tag', 'user']
 
 class EntryFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = SearchEntry
-        fields = ['name', 'description', 'file','tag']
+        fields = ['name', 'description', 'file','tag', 'user']
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag

@@ -1,12 +1,15 @@
 let search_entries = []; /* variable to store entries, not needed */
 
 /* API Endpoints */
+
+/* different branch for production */
 const hostName = location.hostname;
 const port = location.port;
 let add_link_endpoint = `http://${hostName}:${port}/addentrylink/`;
 let add_file_endpoint = `http://${hostName}:${port}/addentryfile/`;
 let update_endpoint =`http://${hostName}:${port}/update/`;
 let delete_endpoint = `http://${hostName}:${port}/delete/`
+
 
 /* instant search config */
 const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
@@ -217,6 +220,7 @@ function uploadFunction() {
     formData.append('description', document.getElementById('description').value);
     formData.append('link', document.getElementById('link-entry').value);
     formData.append('tag', tagValue);
+    formData.append('user', document.getElementById('username').innerHTML);
     
     /* the form of request is based on the whether or not a div is visible. So, if 
       the paste link  div is visible, then we will be sending that request */
@@ -309,25 +313,33 @@ function openUpdate(btn) {
 }
 let modalBtn = document.getElementById("modal-btn");
 /* API Call is made when the 'Update' button of the modal is clicked */
-modalBtn.addEventListener("click", function() {
+modalBtn.addEventListener("click", async function() {
   let formData = new FormData();
   let newName = document.getElementById("new-title").value;
   let newDescription = document.getElementById("new-description").value;
   formData.append('name', nameEntry); /* this is needed for Django can find the SearchEntry and update it */
+  formData.append('user', document.getElementById('username').innerHTML);
+  console.log("hi", document.getElementById('username').innerHTML);
   formData.append('new-name', newName);
   formData.append('new-description',  newDescription); 
   const csrftoken = getCookie('csrftoken');
   fetch(update_endpoint,{
-    method:'PUT', /* Note this is a PUT request */
-    body: formData,
-    headers: {
-      'X-CSRFToken':csrftoken, /* is this needed for production? */
-    }
-  })
+      method:'PUT', /* Note this is a PUT request */
+      body: formData,
+      headers: {
+        'X-CSRFToken':csrftoken, /* is this needed for production? */
+      }
+    }).then((response)=> {
+      if (response.status==201) {
+        modal.style.display = "none";
+        currHit.querySelector('#testing').innerHTML = "<b>Name: </b>" + newName;
+        currHit.querySelector('#descript').innerHTML = "<b>Description: </b>" + newDescription;
+      } else {
+        window.alert("Cannot Edit An Entry That Is Not Your Own!!")
+      }
+    })
   
-  modal.style.display = "none";
-  currHit.querySelector('#testing').innerHTML = "<b>Name: </b>" + newName;
-  currHit.querySelector('#descript').innerHTML = "<b>Description: </b>" + newDescription;
+  
 })
 
 /* If we click outside the range of the Edit Modal, it should close */
@@ -363,6 +375,7 @@ window.onclick = function(event) {
 document.getElementById("yes-delete").addEventListener("click", function() {
   let formData = new FormData();
   formData.append('name', deleteNameEntry);
+  formData.append('user', document.getElementById('username').innerHTML);
   const csrftoken = getCookie('csrftoken');
   fetch(delete_endpoint,{
     method:'DELETE', /* Note this is a PUT request */
@@ -370,8 +383,14 @@ document.getElementById("yes-delete").addEventListener("click", function() {
     headers: {
       'X-CSRFToken':csrftoken, /* is this needed for production? */
     }
+  }).then((response)=> {
+    if (response.status==201) {
+      currDeleteHit.style.display = "none";
+      deleteModal.style.display = "none";
+    } else {
+      window.alert("Cannot Delete An Entry That Is Not Your Own!!")
+    }
   })
-  currDeleteHit.style.display = "none";
-  deleteModal.style.display = "none";
+ 
 
 })

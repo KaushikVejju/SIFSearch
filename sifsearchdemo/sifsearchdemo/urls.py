@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path,include
 from . import views
 from django.conf.urls.static import static
-
+from django.contrib.auth import logout
 
 urlpatterns = [
     path('admin/', admin.site.urls), path('', views.sif_search_home),
     path('addentrylink/',views.add_entry_link), # endpoint for uploading an entry with a link
     path('addentryfile/',views.add_entry_file), # endpoint for uploading an entry with a file
     path('update/',views.update_entry),
-    path('delete/', views.delete_entry)
+    path('delete/', views.delete_entry),
+    path("register/", views.register_request, name="register"),
+    path("login", views.login_request, name="login"),
+    path('logout', views.logout_request, name='logout')
 ]
