@@ -11,7 +11,7 @@ let delete_endpoint = `http://${hostName}:${port}/delete/`
 /* instant search config */
 const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
 const search = instantsearch({
-  indexName: 'SearchEntry',
+  indexName: 'CodeBlockEntry',
   searchClient
 });
 
@@ -38,13 +38,14 @@ search.addWidgets([
     container:'#hits', 
     templates: {
       item: 
+      /*TODO: another template for code blocks */
       `<div class = "hit-item">
           <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i></button>
           <button id = "delete-btn" type="button" onclick="openDelete(this)"><i class="fa-solid fa-trash"></i>
           </button>
-          <p id = "testing" class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
-          <p id = "descript"><b>Description: </b>{{{_highlightResult.description.value}}}</p>
-          <button onclick="showMedia('{{link}}', '{{file}}')" class = "view-media"> View Media </button>
+          <p id = "testing" class = "testing"><b>Notebook: </b>{{{_highlightResult.notebook.value}}}</p>
+          <p id = "descript"><b>Code: </b>{{{_highlightResult.code.value}}}</p>
+          <p id = "explanation"><b>Explanation: </b>{{{_highlightResult.explanation.value}}}</p>
        </div>
       `,
     }
@@ -236,6 +237,8 @@ function uploadFunction() {
     /* User decides to upload a file and not a link */
     else {
       formData.append('file',fileEntry);
+      console.log(document.getElementById("myFile").value);
+      formData.append('file_name', document.getElementById("myFile").value);
       fetch(add_file_endpoint,{
         method:'POST',
         body: formData,

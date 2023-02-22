@@ -24,5 +24,5 @@ urlpatterns = [
     path('addentrylink/',views.add_entry_link), # endpoint for uploading an entry with a link
     path('addentryfile/',views.add_entry_file), # endpoint for uploading an entry with a file
     path('update/',views.update_entry),
-    path('delete/', views.delete_entry)
+    path('delete/', views.delete_entry),
 ]

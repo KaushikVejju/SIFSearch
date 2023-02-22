@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload a Jupyter Notebook File</title>
+  </head>
+  <body>
+    <h1>Jupyter Notebook File</h1>
+    <form method="post" action="/uploadnotebook/" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="tital">Title:</label>
+      <input type="text" id="title" name="title">
+      <br><br>
+      <label for="des">Description:</label>
+      <input type="text" id="des" name="des">
+      <br><br>
+      <label for="nb">File:</label>
+      <input type="file" id="nb" name="nb">
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
