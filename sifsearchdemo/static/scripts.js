@@ -66,8 +66,8 @@ search.addWidgets([
           <p id = "testing" class = "testing"><b>Notebook: </b>{{{_highlightResult.notebook.value}}}</p>
           <p id = "descript"><b>Code: </b>{{{_highlightResult.code.value}}}</p>
           <p id = "explanation"><b>Explanation: </b>{{{_highlightResult.explanation.value}}}</p>
-       </div>
-      `,
+        </div>
+        `,
       },
     }),
   ]),
