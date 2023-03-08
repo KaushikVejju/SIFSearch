@@ -10,18 +10,18 @@ let delete_endpoint = `http://${hostName}:${port}/delete/`
 
 /* instant search config */
 const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
+
 const search = instantsearch({
-  indexName: 'CodeBlockEntry',
+  indexName: 'SearchEntry',
   searchClient
 });
-
 
 /* Adding Widgets for InstantSearch.js */
 search.addWidget(
   instantsearch.widgets.searchBox({
     container:'#searchbardiv',
-
   })
+
 );
 search.addWidgets([
   /* number of hits per page (needed for pagination feature) */
@@ -38,8 +38,28 @@ search.addWidgets([
     container:'#hits', 
     templates: {
       item: 
-      /*TODO: another template for code blocks */
       `<div class = "hit-item">
+          <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          <button id = "delete-btn" type="button" onclick="openDelete(this)"><i class="fa-solid fa-trash"></i>
+          </button>
+          <p id = "testing" class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
+          <p id = "descript"><b>Description: </b>{{{_highlightResult.description.value}}}</p>
+          <p id = "tag"><b>Tag: </b>{{{tag}}}</p>
+          <button onclick="showMedia('{{link}}', '{{file}}')" class = "view-media"> View Media </button>
+       </div>
+      `,
+    }
+
+  }),
+
+  instantsearch.widgets
+  .index({ indexName: 'CodeBlockEntry' })
+  .addWidgets([
+    instantsearch.widgets.hits({
+      container: '#hits-codeblocks',
+      templates: {
+        item: 
+        `<div class = "hit-item">
           <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i></button>
           <button id = "delete-btn" type="button" onclick="openDelete(this)"><i class="fa-solid fa-trash"></i>
           </button>
@@ -48,9 +68,10 @@ search.addWidgets([
           <p id = "explanation"><b>Explanation: </b>{{{_highlightResult.explanation.value}}}</p>
        </div>
       `,
-    }
-
-  }),
+      },
+    }),
+  ]),
+    
   /* adding the pagination feature */
   instantsearch.widgets.pagination({
     container: '#pagination',
@@ -59,6 +80,7 @@ search.addWidgets([
 
 /* start the search process */
 search.start();
+/*console.log(search.renderState["SearchEntry"].searchBox);/**/
 
 /* Some conditions when the home page is loaded */
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -69,6 +91,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("searchbardiv").style.display = "none";
   document.getElementById("upload-success").style.display = "none";
   document.getElementById("hits").style.display = "none";
+  document.getElementById("hits-codeblocks").style.display = "none";
   document.getElementById('display-refinement').style.display = "none";
   document.getElementById('refinement-list').style.display = "none";
 
@@ -138,6 +161,7 @@ function getCookie(name) {
 /* function to display the hits list */
 function displayList() {
   document.getElementById("hits").style.display = "block";
+  document.getElementById("hits-codeblocks").style.display = "block";
 }
 
 /* If user wants to enter a tag */
@@ -164,6 +188,7 @@ function uploadMode() {
     uploadDiv.style.display = "block";
     document.getElementById("searchbardiv").style.display = "none";
     document.getElementById("hits").style.display = "none";
+    document.getElementById("hits-codeblocks").style.display = "none";
     document.getElementById("pagination").style.display = "none";
     document.getElementById('display-refinement').style.display = "none";
 
@@ -174,12 +199,14 @@ function uploadMode() {
 function searchMode() {
   let searchbarDiv = document.getElementById('searchbardiv');
   let hits = document.getElementById('hits');
+  let hitsCodeblocks = document.getElementById('hits-codeblocks');
   let refinementList = document.getElementById('display-refinement');
   if (searchbarDiv.style.display=='none' && hits.style.display == 'none' ) {
     document.getElementById("search-btn-mode").style.backgroundColor = "rgb(74, 7, 103)";
     document.getElementById("upload-btn-mode").style.backgroundColor = "rgb(96, 72, 192)";
     searchbarDiv.style.display = "block";
     hits.style.display = "block";
+    hitsCodeblocks.style.display = "block";
     refinementList.style.display = "block";
     document.getElementById("pagination").style.display = "block";
     document.getElementById("upload-div").style.display = "none";
