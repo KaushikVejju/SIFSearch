@@ -52,6 +52,9 @@ search.addWidgets([
 
   }),
 
+  
+
+
   instantsearch.widgets
   .index({ indexName: 'CodeBlockEntry' })
   .addWidgets([
@@ -101,6 +104,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("show-file").style.display = "none";
   document.getElementById("add-tag").style.display = "none";
 });
+
+
+const renderStats = (renderOptions, isFirstRender) => {
+  const { nbHits } = renderOptions;
+
+  document.querySelector('hits-stats').innerHTML = `
+    <p>${nbHits} hits</p>
+  `;
+};
 
 /* code for the light and dark mode button functionality */
 function changeMode() {

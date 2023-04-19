@@ -4,8 +4,9 @@ the event that the user makes an entry that includes a link or one that includes
 '''
 from rest_framework import serializers
 from nbformat import read, NO_CONVERT
+import os
 import openai
-openai.api_key = "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" #TODO: move this somewhere else
+openai.api_key = os.getenv('OPENAI_API_KEY') #TODO: move this somewhere else
 from .models import SearchEntry,Tag, NotebookEntry, CodeBlockEntry
 
 class EntrySerializer(serializers.ModelSerializer):
