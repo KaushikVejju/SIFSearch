@@ -8,6 +8,8 @@ let add_file_endpoint = `http://${hostName}:${port}/addentryfile/`;
 let update_endpoint =`http://${hostName}:${port}/update/`;
 let delete_endpoint = `http://${hostName}:${port}/delete/`
 
+let regHits = 0;
+
 /* instant search config */
 const searchClient = algoliasearch('MAPEN2F6CS', '798b08e289835be9a469bb40430a66c6');
 
@@ -23,6 +25,7 @@ search.addWidget(
   })
 
 );
+
 search.addWidgets([
   /* number of hits per page (needed for pagination feature) */
   instantsearch.widgets.configure({
@@ -34,26 +37,29 @@ search.addWidgets([
     attribute: 'tag',
   }),
   /* defining template for a hit */
-  instantsearch.widgets.hits({
-    container:'#hits', 
-    templates: {
-      item: 
-      `<div class = "hit-item">
-          <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i></button>
-          <button id = "delete-btn" type="button" onclick="openDelete(this)"><i class="fa-solid fa-trash"></i>
-          </button>
-          <p id = "testing" class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
-          <p id = "descript"><b>Description: </b>{{{_highlightResult.description.value}}}</p>
-          <p id = "tag"><b>Tag: </b>{{{tag}}}</p>
-          <button onclick="showMedia('{{link}}', '{{file}}')" class = "view-media"> View Media </button>
-       </div>
-      `,
-    }
+  instantsearch.widgets
+  .index({ indexName: 'SearchEntry' })
+  .addWidgets([
+    instantsearch.widgets.hits({
+      container:'#hits', 
+      templates: {
+        empty: '',
+        item: 
+        `<div class = "hit-item">
+            <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i></button>
+            <button id = "delete-btn" type="button" onclick="openDelete(this)"><i class="fa-solid fa-trash"></i>
+            </button>
+            <p id = "testing" class = "testing"><b>Name: </b>{{{_highlightResult.name.value}}}</p>
+            <p id = "descript"><b>Description: </b>{{{_highlightResult.description.value}}}</p>
+            <p id = "tag"><b>Tag: </b>{{{tag}}}</p>
+            <button onclick="showMedia('{{link}}', '{{file}}')" class = "view-media"> View Media </button>
+        </div>
+        `,
+      }
 
-  }),
+    }),
 
-  
-
+  ]),
 
   instantsearch.widgets
   .index({ indexName: 'CodeBlockEntry' })
@@ -61,6 +67,7 @@ search.addWidgets([
     instantsearch.widgets.hits({
       container: '#hits-codeblocks',
       templates: {
+        empty: '',
         item: 
         `<div class = "hit-item">
           <button id = "edit-btn" type="button" onclick="openUpdate(this)"> Edit <i class="fa-solid fa-pen-to-square"></i></button>
@@ -72,7 +79,7 @@ search.addWidgets([
         </div>
         `,
       },
-    }),
+    }),    
   ]),
     
   /* adding the pagination feature */
@@ -104,15 +111,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById("show-file").style.display = "none";
   document.getElementById("add-tag").style.display = "none";
 });
-
-
-const renderStats = (renderOptions, isFirstRender) => {
-  const { nbHits } = renderOptions;
-
-  document.querySelector('hits-stats').innerHTML = `
-    <p>${nbHits} hits</p>
-  `;
-};
 
 /* code for the light and dark mode button functionality */
 function changeMode() {
