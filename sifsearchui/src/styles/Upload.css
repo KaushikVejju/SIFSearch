@@ -1,0 +1,83 @@
+.upload-div {
+    width: 45%;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: rgb(249, 249, 249);
+    padding: 0.5em;
+    border: none;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.form-span {
+    border:none;
+    border-left: 3px solid rgb(215, 99, 99);
+    padding-left: 0.3em;
+}
+
+.upload-options {
+    text-align: left;
+}
+
+.upload-div input,textarea {
+    border: none;
+    border-radius: 5px;;
+    background-color: rgb(236, 236, 236);
+    padding: 0.25em;
+}
+
+.submit-btn {
+    border: none;
+    border-radius: 5px;
+    color: black;
+    padding: 0.5em;
+    width: 8em;
+    font-size: 0.85em;
+    margin-bottom: 1em;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: scale(1.05);
+}
+
+.upload-options {
+    width: 70%;
+    margin: 0 auto;
+}
+
+/* when the user hover over the button, there should be linear gradient change */
+.upload-options input {
+    
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}
+
+select {
+    border: none;
+    background-color: rgb(236, 236, 236);
+    padding: 0.5em;
+    border-radius: 5px;
+    width: 90%;
+
+}
+
+.submit-div {
+    margin-top: 1em;
+    text-align: center;
+}
+
+.dropdown {
+    width: 70%;
+}
+
+.goback-btn {
+    border: none;
+    border-radius: 5px;;
+    background-color:   rgb(182, 52, 52);
+    color: white;
+    padding: 1em;
+    font-size: 0.75em;
+}

@@ -1,0 +1,92 @@
+.login-div {
+    width: 35%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(249, 249, 249);
+    padding: 0.5em;
+    border: none;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    font-size: 1.25em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    
+}
+
+.login-div h1 {
+    text-align: center;
+}
+
+.login-div input {
+    border: none;
+    border-radius: 5px;;
+    background-color: rgb(236, 236, 236);
+    padding: 0.25em;
+    margin-bottom: 0.5em;
+}
+.login-form-items {
+    margin: 0 auto;
+    width: 80%;
+}
+.login-submit-div {
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+}
+.login-submit-div input {
+    padding: 0.85em;
+    width: 70%;
+}
+.login-submit-btn {
+   transition: transform 0.3s ease;
+   font-size: 0.75em;
+}
+.login-submit-btn:hover {
+    transform: scale(1.05);
+}
+.login-span {
+    border:none;
+    border-left: 3px solid  rgb(215, 99, 99);
+    padding-left: 0.3em;
+}
+
+.no-account-div {
+    text-align: center;
+    font-size: 0.75em;
+    margin-top: 0.5em;
+}
+
+.sign-up-btn {
+    border: none;
+    padding: 0.25em;
+    border-radius: 5px;
+}
+
+/* Loading CSS */
+
+#loading {
+    width: 1rem;
+    height: 1rem;
+    border: 5px solid #f3f3f3;
+    border-top: 4px solid #962929;
+    border-radius: 100%;
+    margin: auto;
+    visibility: hidden;
+    animation: spin 1s infinite linear;
+}
+#loading.display {
+    visibility: visible;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

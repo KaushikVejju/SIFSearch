@@ -1,0 +1,31 @@
+.welcome-div {
+    text-align: center;
+    font-size: 1.15em;
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+h3 {
+    margin-top: -1em;
+}
+.sif-title {
+    color: rgb(182, 52, 52);
+}
+
+
+.welcome-btns {
+    width: 45%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.welcome-btns button {
+    margin-right: 1em;
+    height: 3em;
+    font-size: 0.75em;
+    width: 6em;
+    border: none;
+    border-bottom: 3px solid  rgb(182, 52, 52);
+}
