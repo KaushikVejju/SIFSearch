@@ -43,8 +43,6 @@ const Register = ({handleRegister}) => {
             <h2>Create Your Account</h2>
             <form class="register-form">
                 <div class="register-form-items">
-                <span class="register-span"> Username: </span>
-                    <input type="text" id="register-email" name="registeremail" placeholder='Enter your username' required value={formValue.registeremail} onChange={handleInput}></input><br></br>
                     <span class="register-span"> Email: </span>
                     <input type="text" id="register-email" name="registeremail" placeholder='Enter your email' required value={formValue.registeremail} onChange={handleInput}></input><br></br>
                     <span class="register-span"> Password: </span>

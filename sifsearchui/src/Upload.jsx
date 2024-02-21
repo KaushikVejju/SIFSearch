@@ -31,7 +31,7 @@ const Upload = () => {
         {value:"internal", label:"Internal Tools"},
         {value:"misc", label:"Miscellaneous"}
     ]
-    const [selectedOptions, setSelectedOptions] = useState();
+    const [selectedOptions, setSelectedOptions] = useState([]);
     const [submissionConfirmed, setSubmissionConfirmed] = useState(false);
 
     function handleSelect(data) {
@@ -49,8 +49,7 @@ const Upload = () => {
         formData.append('name',formValue.name);
         formData.append('description',formValue.description);
         formData.append('link', formValue.link);
-        formData.append('tags', selectedOptions.label);
-        console.log(formValue.file)
+        formData.append('tags_test', selectedOptions.map(x => x.label));
         if (document.getElementById('uploadedFile').files.length === 0) {
             formData.append('file', '');
         } else {
@@ -106,6 +105,7 @@ const Upload = () => {
                             value={selectedOptions}
                             onChange={handleSelect}
                             isSearchable={true}
+                            isMulti
                         />
                     </div>
                     <div class="submit-div">
