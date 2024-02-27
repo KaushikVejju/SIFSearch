@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/Search.css';
 import algoliasearch from 'algoliasearch/lite'
+import { useState } from 'react';
 import { InstantSearch, RefinementList, SearchBox, Hits, Highlight, Pagination, HitsPerPage} from 'react-instantsearch';
 
 const searchClient = algoliasearch('AVSX85BFB4', '07dc244522ff0f29972b57e2a894e408');
@@ -24,25 +25,34 @@ function Hit({ hit }) {
                     <p><b>View Link: </b><a href={hit.link} target="_blank">Click </a></p>
                 )
             }
-        
-            <p><b>Tag: </b><span class="tag-span"><Highlight attribute="tags_test" hit={hit}/></span></p>
-            {
+            <div class="tags_div">
+                 <div><p><b>Tag: </b></p></div>
+                 <div class="tag_container">
+                    {
 
-                hit.tags_test.map((item, index)=> (
-                    <div key={index} style={{ border: '1px solid black' }}>
-                        {item}
-                    </div>
-                ))
-            }
-
+                        hit.tags_test.map((item, index)=> (
+                            <div class="tag_item" key={index}>
+                                {item}
+                        </div>))
+                    }
+                 </div>
+            </div>
         </div>
     );
   }
+
+
+// Revise CSS for the Search Component
 const Search = () => {
+    const [showRefinement, setRefinement] = useState(false);
     return (
         <div class="search-div">
             <InstantSearch searchClient={searchClient} indexName="SearchEntry">
                 <SearchBox placeholder='Search For Something Cool.'/>
+                <div>
+                    <button class= "toggle-button" onClick={()=>setRefinement(!showRefinement)}>{showRefinement? "Close Refinement List" : "Show Refinement List"}</button>
+                    {showRefinement && <RefinementList attribute='tags_test'/>}
+                </div>
                 <Hits hitComponent={Hit}/>
                 <Pagination/>
                 <HitsPerPage
@@ -50,7 +60,6 @@ const Search = () => {
                     { label: '5 hits per page', value: 5, default: true },
                     ]}
                 />
-                <RefinementList attribute="name" />
 
             </InstantSearch>
         </div>
