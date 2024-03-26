@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-htjbn21&pqhknc24abyz*wa09i2f@p!&4ueqx_!owfgp5^%qjj
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if os.getcwd() == '/app':
+    DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -142,7 +144,13 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
 # https://stackoverflow.com/questions/44037474/cors-error-while-consuming-calling-rest-api-with-react
 ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.User' # override the default user for Django
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'

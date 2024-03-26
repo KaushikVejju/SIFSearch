@@ -6,9 +6,11 @@ from .serializers import UserSerializer
 from .models import User
 import jwt,datetime
 # Create your views here.
-class RegisterView(APIView):
+class RegisterView(APIView): 
+    '''
+    Should register a unique user into the SIFSearch website.
+    '''
     def  post(self, request):
-        print(request.data)
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -32,16 +34,16 @@ class LoginView(APIView):
             'iat': datetime.datetime.utcnow(), # token creation date
         }
 
-        token = jwt.encode(payload, 'secret', algorithm='HS256')
+        token = jwt.encode(payload, 'secret', algorithm='HS256') # hashing algorithm useed
         response = Response()
-        response.set_cookie(key='jwt', value=token, httponly=True) # prevent token from being accessed through front-end
+        response.set_cookie(key='jwtToken', value=token, httponly=True, samesite='None', secure=True,max_age=3600) # cookie is sent to browser
         response.data = {
             'jwt':token
         }
         return response
 class UserView(APIView):
     def get(self, request):
-        token = request.COOKIES.get('jwt')
+        token = request.COOKIES.get('jwtToken')
         if not token:
             raise AuthenticationFailed('Unauthenticated!')
         try:
@@ -55,10 +57,7 @@ class UserView(APIView):
 class LogoutView(APIView):
     def post(self, request):
         response = Response()
-        response.delete_cookie('jwt')
-        response.data = {
-            'Message': 'Success'
-        }
+        response.delete_cookie(key='jwtToken', samesite='None') # cookie is sent to browser
         return response
 
 

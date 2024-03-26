@@ -3,4 +3,4 @@ from .models import SearchEntry
 class SearchEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = SearchEntry
-        fields = ['name', 'description', 'link', 'tags_test','file']
+        fields = ['user','name', 'description', 'link', 'tags_test','file']

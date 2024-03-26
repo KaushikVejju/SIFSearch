@@ -9,7 +9,12 @@ from rest_framework import status
 import algoliasearch_django as algoliasearch
 from .models import SearchEntry
 
-
+'''
+- create a feature where we can see top news stories related to finance (associated with a ticker)
+- user enters a ticker (we verify the list)
+- if valid, we present the news (top 5 articles associated with it), from the news API
+- this is a front-end feature
+'''
 @api_view(['POST'])
 def index(request):
     '''
