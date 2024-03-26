@@ -1,41 +1,96 @@
+import React, { useState, useEffect } from 'react';
 import Welcome from './Welcome';
 import Login from './Login';
-import Register from './Register'
-import React, {useState} from 'react';
+import Register from './Register';
+import NavBar from './NavBar';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-  const handleLogin = () => {
-    // Perform login logic, and if successful, setLoggedIn(true)
-    setLoggedIn(true);
+  const [userEmail, setUserEmail] = useState("");
+  const [loggedIn, setLoggedIn] = useState("login");
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+  const validateToken = async () => {
+    try {
+      const csrftoken = getCookie('csrftoken'); // CORS Token
+      const response = await fetch('http://127.0.0.1:8000/api/user', {
+        mode:'cors',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json', 'X-CSRFToken':csrftoken,
+        },
+        credentials: 'include' // Ensures cookies are included with the request
+      });
+
+      if (response.ok) {
+        const res = await response.json();
+        setUserEmail(res["email"]);
+        setLoggedIn("welcome");
+      } else {
+        setLoggedIn("login");
+      }
+    } catch (error) {
+      console.error('Error during token validation', error);
+      setLoggedIn("login");
+    }
+  };
+  useEffect(() => {
+    validateToken();
+  }, []);
+
+  const setPage = (page) => {
+    setLoggedIn(page);
   };
 
-  const handleSignUpClick = () => {
-      setShowRegister(true);
-  };  
+  const handleLogin = () => {
+    setPage("welcome");
+  };
+
+  const handleLogout = () => {
+    setPage("login");
+  };
 
   const handleRegister = () => {
-    // Perform register logic, and if successful, setLoggedIn(true)
-    setShowRegister(false); // Hide the Register component after successful registration
+    setPage("login");
   };
-  const handleLogout = () => {
-    setLoggedIn(false);
-    document.getElementById('header-login-span').innerHTML = "Please Login"
-};
+
+  const showRegister = () => {
+    setPage("register");
+  };
+
+  const renderContent = () => {
+    switch (loggedIn) {
+      case "login":
+        return (<div><NavBar showLogout={false} handleLogout={handleLogout} /><br /><Login handleLogin={handleLogin} showRegister={showRegister} /></div>);
+      case "welcome":
+        validateToken();
+        return (<div><NavBar showLogout={true} userEmail = {userEmail} handleLogout={handleLogout} /><br /><Welcome userEmail = {userEmail} /></div>);
+      case "register":
+        return (<div><NavBar showLogout={false} handleLogout={handleLogout} /><br /><Register handleRegister={handleRegister} /></div>);
+      default:
+        return (<div><NavBar showLogout={false} handleLogout={handleLogout} /><br /><Login handleLogin={handleLogin} showRegister={showRegister} /></div>);
+    }
+  };
+
   return (
     <div className="App">
-      <br></br>
-      <div>
-            {loggedIn ? (
-                <Welcome handleLogout={handleLogout}/>
-            ) : showRegister ? (
-                <Register handleRegister={handleRegister}/>
-            ) : (
-                <Login handleLogin={handleLogin} handleSignUpClick={handleSignUpClick} />
-            )}
-      </div>
+      {renderContent()}
     </div>
   );
 }
+
 export default App;

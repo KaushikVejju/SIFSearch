@@ -1,21 +1,20 @@
 import React, {useState} from 'react';
 import './styles/Login.css'
+
 // need to embed login into the App component to ensure that everything works
-const Login = ({ handleLogin, handleSignUpClick}) => {
-    const loader = document.querySelector('#loading')
-    // showing loading
-    function displayLoading() {
-        loader.classList.add("display");
-        // to stop loading after some time
-        setTimeout(() => {
-            loader.classList.remove("display");
-        }, 5000);
+const Login = ({handleLogin, showRegister}) => {
+
+    // Login Fields
+    var initialFormValues = {loginemail:'', loginpassword:''};
+    const [formValue,setFormValue] = useState(initialFormValues);
+    const [errorMessage, setErrorMessage] = useState(""); // New state for error message
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleInput=(e)=>{
+        const {name, value} = e.target;
+        setFormValue({...formValue, [name]:value})
     }
 
-    // hiding loading 
-    function hideLoading() {
-        loader.classList.remove("display");
-    }
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -32,56 +31,43 @@ const Login = ({ handleLogin, handleSignUpClick}) => {
         return cookieValue;
     }
 
-    var initialFormValues = {registeremail:'', registerpassword:''};
-    const [formValue,setFormValue] = useState(initialFormValues);
-    const handleInput=(e)=>{
-        const {name, value} = e.target;
-        setFormValue({...formValue, [name]:value})
-    }
-    const loginUser = async() => {
-        displayLoading()
-        console.log(JSON.stringify({email: formValue.loginemail , password: formValue.loginpassword}))
+   
+    // Request to API
+    const loginToSifSearch = async() => {
+        setIsLoading(true);
         const csrftoken = getCookie('csrftoken'); // CORS Token
         let res =  await fetch("http://127.0.0.1:8000/api/login", {
             mode: 'cors',
             method: "POST",
-            headers: {'X-CSRFToken':csrftoken, "Content-Type": "application/json", },
-            //credentials: 'include', <-- TODO: resolve
+            headers: {'X-CSRFToken':csrftoken,  "Content-Type": "application/json", },
             body: JSON.stringify({email: formValue.loginemail , password: formValue.loginpassword}),
-
+            credentials: 'include',
         });
+        setIsLoading(false);
         if (res.ok) {
-            hideLoading()
-            handleLogin()
-            document.getElementById('header-login-span').innerHTML = formValue.loginemail + " | ";
-            let headerDiv = document.getElementById("header-login-span");
-            let logoutBtn = document.createElement('BUTTON');
-            let logoutBtnText = document.createTextNode("Logout");
-            logoutBtn.appendChild(logoutBtnText);
-            headerDiv.appendChild(logoutBtn);
-            logoutBtn.setAttribute('id', 'logoutBtn');
+            handleLogin();
+        } else {
+            setErrorMessage("Unable to login. Please check your credentials.")
         }
     }
-    
+  
     return (
         <div class="login-div">
-            <h1>Login</h1>
-            <div id="loading"></div>
-            <form class="login-form">
-                <div class="login-form-items">
-                    <span class="login-span"> Email: </span>
-                    <input type="text" id="login-email" name="loginemail" placeholder='Enter your email' required value={formValue.loginemail} onChange={handleInput}></input><br></br>
-                    <span class="login-span"> Password: </span>
-                    <input type="password" id="login-password" name="loginpassword" placeholder='Enter your password' required value={formValue.loginpassword} onChange={handleInput}></input><br></br>
-                    <br></br>
-                    <div class="login-submit-div">
-                        <input class="login-submit-btn" type="button" value="Submit"  onClick={loginUser}></input>
+            <h1>Login </h1>
+            <form class="login-form" onSubmit={(e)=> {e.preventDefault(); loginToSifSearch()}}>
+                {isLoading &&
+                    <div class = "progress">
+                            <div class="color"></div>
                     </div>
-                </div>
+                }
+                {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+                <input type="text" name="loginemail" placeholder='Enter Email' required value={formValue.loginemail} onChange={handleInput}></input><br/>
+                <input type="text" name="loginpassword" placeholder='Enter Password' required value={formValue.loginpassword} onChange={handleInput}></input><br/>
+                <button class="login-btn" type="submit"> Login</button><br/>
             </form>
-            <div class="no-account-div">
-                    Don't have an account?  <button class="sign-up-btn" onClick={handleSignUpClick}>Sign Up Here.</button>
-            </div>
+                <button class="google-btn" onClick={() => handleLogin()}> Sign In With Google </button><br/>
+                Don't have an account? <button class="register-btn" onClick={() => showRegister()}><b>Sign Up Here</b></button>
+
         </div>
     )
 }

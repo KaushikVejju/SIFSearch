@@ -124,3 +124,19 @@ ol li {
     margin-left: 0.5em;
     color: rgb(186, 44, 44);
 }
+
+/* Username Information Styling */
+.username-info {
+    font-size: 0.75em;
+    width: fit-content;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em;
+    background-color: rgb(182, 82, 82);
+    color: white;
+}
+
+.username-info-container {
+    display: flex;
+    justify-content: right;
+}

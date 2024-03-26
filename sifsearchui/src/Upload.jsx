@@ -5,7 +5,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import Select from "react-select";
 
 /* code copied from django docs (dealing with CRSF token) */
-const Upload = () => {
+const Upload = ({userEmail}) => {
 
     function getCookie(name) {
         let cookieValue = null;
@@ -46,6 +46,7 @@ const Upload = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         let formData = new FormData();
+        formData.append('user', userEmail); 
         formData.append('name',formValue.name);
         formData.append('description',formValue.description);
         formData.append('link', formValue.link);
@@ -61,6 +62,7 @@ const Upload = () => {
             mode: 'cors',
             method: "POST",
             headers: {'X-CSRFToken':csrftoken},
+            credentials: 'include',
             body: formData
         });
         if (res.ok) {

@@ -31,6 +31,7 @@ const Register = ({handleRegister}) => {
         let res =  await fetch("http://127.0.0.1:8000/api/register", {
             mode: 'cors',
             method: "POST",
+            credentials: 'include',
             headers: {'X-CSRFToken':csrftoken,  "Content-Type": "application/json", },
             body: JSON.stringify({email: formValue.registeremail , password: formValue.registerpassword})
         });
@@ -43,14 +44,13 @@ const Register = ({handleRegister}) => {
             <h2>Create Your Account</h2>
             <form class="register-form">
                 <div class="register-form-items">
-                    <span class="register-span"> Email: </span>
                     <input type="text" id="register-email" name="registeremail" placeholder='Enter your email' required value={formValue.registeremail} onChange={handleInput}></input><br></br>
-                    <span class="register-span"> Password: </span>
                     <input type="password" id="register-password" name="registerpassword" placeholder='Enter your password' required value={formValue.registerpassword} onChange={handleInput}></input><br></br>
                     <br></br>
                     <div class="register-submit-div">
                         <input class="register-submit-btn" type="button" value="Create Account" onClick={registerUser}></input>
                     </div>
+                    <button onClick={handleRegister}> Back To Login </button>
                 </div>
             </form>
         </div>

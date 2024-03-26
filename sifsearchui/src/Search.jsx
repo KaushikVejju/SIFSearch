@@ -12,17 +12,16 @@ function Hit({ hit }) {
     
     return (
         <div class="hit">
-        
             <p><b>Name: </b><Highlight attribute="name" hit={hit}/></p>
             <p><b>Description: </b><Highlight attribute="description" hit={hit}/></p>
             {
                 hit.file != '' && (
-                    <p><b> View File: </b><a href={"http://127.0.0.1:8000/"+hit.file} target="_blank"> <Highlight attribute="file" hit={hit}/></a></p>
+                    <p><b> View File: </b><a href={"http://127.0.0.1:8000/"+hit.file} target="_blank"> <Highlight attribute="file" hit={hit}/> Click To View</a></p>
                 )
             }
             {
                 hit.link !== '' && (
-                    <p><b>View Link: </b><a href={hit.link} target="_blank">Click </a></p>
+                    <p><b>View Link: </b><a href={hit.link} target="_blank">Click To View</a></p>
                 )
             }
             <div class="tags_div">
@@ -37,6 +36,7 @@ function Hit({ hit }) {
                     }
                  </div>
             </div>
+            <div class="username-info-container"><div class="username-info"><Highlight attribute="user" hit={hit}/></div></div>
         </div>
     );
   }
@@ -51,7 +51,7 @@ const Search = () => {
                 <SearchBox placeholder='Search For Something Cool.'/>
                 <div>
                     <button class= "toggle-button" onClick={()=>setRefinement(!showRefinement)}>{showRefinement? "Close Refinement List" : "Show Refinement List"}</button>
-                    {showRefinement && <RefinementList attribute='tags_test'/>}
+                {showRefinement && <RefinementList attribute='tags_test'/>}
                 </div>
                 <Hits hitComponent={Hit}/>
                 <Pagination/>
@@ -64,6 +64,5 @@ const Search = () => {
             </InstantSearch>
         </div>
     )
-
 }
 export default Search;
