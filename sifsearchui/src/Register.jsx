@@ -48,6 +48,7 @@ const Register = ({handleRegister}) => {
             <h2>Create Your Account</h2>
             <form class="register-form">
                 <div class="register-form-items">
+                {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
                     <input type="text" id="register-email" name="registeremail" placeholder='Enter your email' required value={formValue.registeremail} onChange={handleInput}></input><br></br>
                     <input type="password" id="register-password" name="registerpassword" placeholder='Enter your password' required value={formValue.registerpassword} onChange={handleInput}></input><br></br>
                     <br></br>
