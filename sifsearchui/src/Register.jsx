@@ -21,6 +21,8 @@ const Register = ({handleRegister}) => {
 
     var initialFormValues = {registeremail:'', registerpassword:''};
     const [formValue,setFormValue] = useState(initialFormValues);
+
+    const [errorMessage, setErrorMessage] = useState(""); // New state for error message
     const handleInput=(e)=>{
         const {name, value} = e.target;
         setFormValue({...formValue, [name]:value})
@@ -37,6 +39,8 @@ const Register = ({handleRegister}) => {
         });
         if (res.ok) {
             handleRegister()
+        } else {
+            setErrorMessage("Unable to register. Please check your credentials.")
         }
     }
     return (

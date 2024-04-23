@@ -62,7 +62,7 @@ const Login = ({handleLogin, showRegister}) => {
                 }
                 {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
                 <input type="text" name="loginemail" placeholder='Enter Email' required value={formValue.loginemail} onChange={handleInput}></input><br/>
-                <input type="text" name="loginpassword" placeholder='Enter Password' required value={formValue.loginpassword} onChange={handleInput}></input><br/>
+                <input type="password" name="loginpassword" placeholder='Enter Password' required value={formValue.loginpassword} onChange={handleInput}></input><br/>
                 <button class="login-btn" type="submit"> Login</button><br/>
             </form>
                 <button class="google-btn" onClick={() => handleLogin()}> Sign In With Google </button><br/>
