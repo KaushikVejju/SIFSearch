@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-htjbn21&pqhknc24abyz*wa09i2f@p!&4ueqx_!owfgp5^%qjj'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,9 +48,10 @@ INSTALLED_APPS = [
     'algoliasearch_django',
     'users'
 ]
+
 ALGOLIA = {
     'APPLICATION_ID': 'AVSX85BFB4',
-    'API_KEY': '9478d0e2e2943012c339310d3ab91afb'
+    'API_KEY':  os.getenv('ALGOLIA_ADMIN_KEY')
 }
 
 MIDDLEWARE = [

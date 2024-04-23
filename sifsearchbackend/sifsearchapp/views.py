@@ -16,7 +16,7 @@ from .models import SearchEntry
 - this is a front-end feature
 '''
 @api_view(['POST'])
-def index(request):
+def upload(request):
     '''
     TO DO: change the request body so that it seperates the items in the strings
 
