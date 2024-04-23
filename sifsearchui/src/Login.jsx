@@ -65,7 +65,6 @@ const Login = ({handleLogin, showRegister}) => {
                 <input type="password" name="loginpassword" placeholder='Enter Password' required value={formValue.loginpassword} onChange={handleInput}></input><br/>
                 <button class="login-btn" type="submit"> Login</button><br/>
             </form>
-                <button class="google-btn" onClick={() => handleLogin()}> Sign In With Google </button><br/>
                 Don't have an account? <button class="register-btn" onClick={() => showRegister()}><b>Sign Up Here</b></button>
 
         </div>
