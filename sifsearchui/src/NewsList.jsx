@@ -8,12 +8,14 @@ const NewsList = ({ data, ticker }) => {
 
     return (
         <div class="news-list-div">
-            Results for {ticker}
+            Results for <b>{ticker}</b>
             <hr></hr>
             <ul>
                 {data.map(item => (
                     <li key={item.id}>
-                        <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
+                        <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a><br></br>
+                        <hr className="news-list-div-hr"></hr>
+                        <b>Created:</b> {item.created}
                     </li>
                 ))}
             </ul>

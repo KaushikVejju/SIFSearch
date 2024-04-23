@@ -58,7 +58,7 @@ const Upload = ({userEmail}) => {
         }
 
         const csrftoken = getCookie('csrftoken'); // CORS Token
-        let res =  await fetch("http://127.0.0.1:8000/", {
+        let res =  await fetch("http://127.0.0.1:8000/upload", {
             mode: 'cors',
             method: "POST",
             headers: {'X-CSRFToken':csrftoken},
