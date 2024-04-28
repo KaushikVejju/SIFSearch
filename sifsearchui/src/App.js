@@ -27,7 +27,7 @@ function App() {
   const validateToken = async () => {
     try {
       const csrftoken = getCookie('csrftoken'); // CORS Token
-      const response = await fetch('http://127.0.0.1:8000/api/user', {
+      const response = await fetch(`${process.env.REACT_APP_HOSTNAME}/api/user`, {
         mode:'cors',
         method: 'GET',
         headers: {

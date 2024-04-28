@@ -16,7 +16,7 @@ function Hit({ hit }) {
             <p><b>Description: </b><Highlight attribute="description" hit={hit}/></p>
             {
                 hit.file != '' && (
-                    <p><b> View File: </b><a href={"http://127.0.0.1:8000/"+hit.file} target="_blank"> <Highlight attribute="file" hit={hit}/> Click To View</a></p>
+                    <p><b> View File: </b><a href={`${process.env.process.env.REACT_APP_HOSTNAME}/${hit.file}`} target="_blank"> <Highlight attribute="file" hit={hit}/> Click To View</a></p>
                 )
             }
             {

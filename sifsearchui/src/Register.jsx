@@ -30,7 +30,7 @@ const Register = ({handleRegister}) => {
     const registerUser = async() => {
         console.log(JSON.stringify({name: formValue.registername, email: formValue.registeremail , password: formValue.registerpassword}))
         const csrftoken = getCookie('csrftoken'); // CORS Token
-        let res =  await fetch("http://127.0.0.1:8000/api/register", {
+        let res =  await fetch(`${process.env.REACT_APP_HOSTNAME}/api/register`, {
             mode: 'cors',
             method: "POST",
             credentials: 'include',

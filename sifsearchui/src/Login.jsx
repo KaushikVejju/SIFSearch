@@ -36,7 +36,7 @@ const Login = ({handleLogin, showRegister}) => {
     const loginToSifSearch = async() => {
         setIsLoading(true);
         const csrftoken = getCookie('csrftoken'); // CORS Token
-        let res =  await fetch("http://127.0.0.1:8000/api/login", {
+        let res =  await fetch(`${process.env.REACT_APP_HOSTNAME}/api/login`, {
             mode: 'cors',
             method: "POST",
             headers: {'X-CSRFToken':csrftoken,  "Content-Type": "application/json", },

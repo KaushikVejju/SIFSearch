@@ -57,7 +57,7 @@ const Upload = ({userEmail}) => {
             formData.append('file', document.getElementById('uploadedFile').files[0]);
         }
         const csrftoken = getCookie('csrftoken'); // CORS Token
-        let res =  await fetch("http://127.0.0.1:8000/upload", {
+        let res =  await fetch(`${process.env.REACT_APP_HOSTNAME}/upload`, {
             mode: 'cors',
             method: "POST",
             headers: {'X-CSRFToken':csrftoken},
