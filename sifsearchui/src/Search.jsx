@@ -4,7 +4,7 @@ import algoliasearch from 'algoliasearch/lite'
 import { useState } from 'react';
 import { InstantSearch, RefinementList, SearchBox, Hits, Highlight, Pagination, HitsPerPage} from 'react-instantsearch';
 
-const searchClient = algoliasearch('AVSX85BFB4', '07dc244522ff0f29972b57e2a894e408');
+const searchClient = algoliasearch(process.env.REACT_APP_ALGOLIA_SEARCH_ID, process.env.REACT_APP_ALGOLIA_SEARCH_KEY);
 
 
 // for the hits, we can loop through the items and display them in their own tag component
@@ -16,7 +16,7 @@ function Hit({ hit }) {
             <p><b>Description: </b><Highlight attribute="description" hit={hit}/></p>
             {
                 hit.file != '' && (
-                    <p><b> View File: </b><a href={`${process.env.process.env.REACT_APP_HOSTNAME}/${hit.file}`} target="_blank"> <Highlight attribute="file" hit={hit}/> Click To View</a></p>
+                    <p><b> View File: </b><a href={`${process.env.REACT_APP_HOSTNAME}/${hit.file}`} target="_blank"> <Highlight attribute="file" hit={hit}/> Click To View</a></p>
                 )
             }
             {
