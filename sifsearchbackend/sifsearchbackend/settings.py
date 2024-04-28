@@ -94,9 +94,12 @@ WSGI_APPLICATION = 'sifsearchbackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sifsearch',
-        'USER':'kaushik',
-        'PASSWORD':'vejju',
+        'NAME': os.getenv('DB_DATABASE'),
+        'USER': os.getenv('DB_USERNAME'),
+        'PASSWORD':os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'), 
+        'sslmode': 'require', 
     }
 }
 
