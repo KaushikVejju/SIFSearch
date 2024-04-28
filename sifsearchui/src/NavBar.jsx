@@ -24,7 +24,7 @@ const NavBar= ({showLogout, handleLogout,userEmail}) => {
         }
         e.preventDefault();
         const csrftoken = getCookie('csrftoken'); // CORS Token
-        let res =  await fetch(`${process.env.process.env.REACT_APP_HOSTNAME}/api/logout`, {
+        let res =  await fetch(`${process.env.REACT_APP_HOSTNAME}/api/logout`, {
             mode: 'cors',
             method: "POST",
             headers: {'X-CSRFToken':csrftoken,  "Content-Type": "application/json", },
