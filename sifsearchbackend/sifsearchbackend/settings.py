@@ -29,6 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 if os.getcwd() == '/app':
     DEBUG = False
+ALLOWED_HOSTS = ['sifsearchapp-xlnq3.ondigitalocean.app','localhost']
 
 # Application definition
 
@@ -148,7 +149,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 # https://stackoverflow.com/questions/44037474/cors-error-while-consuming-calling-rest-api-with-react
-ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.User' # override the default user for Django
 CSRF_COOKIE_SECURE = True
