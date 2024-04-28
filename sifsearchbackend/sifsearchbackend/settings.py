@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 if os.getcwd() == '/app':
     DEBUG = False
-ALLOWED_HOSTS = ['sifsearchapp-xlnq3.ondigitalocean.app','localhost']
+ALLOWED_HOSTS = ['https://sifsearchapp-xlnq3.ondigitalocean.app/','localhost']
 
 # Application definition
 
