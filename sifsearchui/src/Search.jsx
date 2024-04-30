@@ -48,7 +48,7 @@ const Search = () => {
     return (
         <div class="search-div">
             <InstantSearch searchClient={searchClient} indexName="SearchEntry">
-                <SearchBox placeholder='Search For Something Cool.'/>
+                <SearchBox placeholder='Search For Something Awesome.'/>
                 <div>
                     <button class= "toggle-button" onClick={()=>setRefinement(!showRefinement)}>{showRefinement? "Close Refinement List" : "Show Refinement List"}</button>
                 {showRefinement && <RefinementList attribute='tags_test'/>}
