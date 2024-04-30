@@ -5,7 +5,6 @@ const Discover = () => {
     const [newsData, setNewsData] = useState([]);
     const [ticker, setTicker] = useState('');
     const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
 
     // Handler to update state on input change
     const handleTickerChange = (e) => {
@@ -16,16 +15,14 @@ const Discover = () => {
         setStartDate(e.target.value);
     };
 
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-    };
-
 
     const getNewsInfo = () => {
         const options = {method: 'GET', headers: {accept: 'application/json'}};
-        fetch(`https://api.benzinga.com/api/v2/news?token=45928b8940684e02b51200847247ebc4&pageSize=5&tickers=${ticker}&dateFrom=${startDate}&dateTo=${endDate}`, options)
+        var marketURL = `https://api.marketaux.com/v1/news/all?symbols=${ticker}&published_after=${startDate}&language=en&api_token=Ql2zyC7Oxfq0UgSFVwp1ED1zajnCSpktVOEUtfax`
+
+        fetch(marketURL, options)
         .then(response => response.json())
-        .then(response => setNewsData(response))
+        .then(response => setNewsData(response.data))
         .catch(err => console.error(err));
     }
     return (
@@ -36,7 +33,6 @@ const Discover = () => {
             <div className="ticker-input-div">
                 <span>Ticker: <input name="ticker" type="text" placeholder="NVDA" value={ticker} onChange={handleTickerChange}></input></span>
                 <span>Start Date: <input name="start" type="text" placeholder="YYYY-MM-DD" value={startDate} onChange={handleStartDateChange}></input></span>
-                <span>End Date: <input name="end" type="text" placeholder="YYYY-MM-DD" value={endDate} onChange={handleEndDateChange}></input></span>
                 <button className="submit-ticker-btn" onClick={getNewsInfo}>View Info</button>
             </div><br></br>
             {/* On successful API response, show the news articles and information associated with the ticker*/}

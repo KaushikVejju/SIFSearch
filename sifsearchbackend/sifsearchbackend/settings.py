@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 if os.getcwd() == '/app':
     DEBUG = False
-ALLOWED_HOSTS = ['sifsearchapp-xlnq3.ondigitalocean.app','localhost']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -95,9 +95,9 @@ DATABASES = {
         'NAME': os.getenv('DB_DATABASE'),
         'USER': os.getenv('DB_USERNAME'),
         'PASSWORD':os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'), 
-        'sslmode': 'require', 
+        #'HOST': os.getenv('DB_HOST'),
+        #'PORT': os.getenv('DB_PORT'), 
+        #'sslmode': 'require', 
     }
 }
 

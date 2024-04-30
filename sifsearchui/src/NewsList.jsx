@@ -12,10 +12,12 @@ const NewsList = ({ data, ticker }) => {
             <hr></hr>
             <ul>
                 {data.map(item => (
-                    <li key={item.id}>
+                    <li key={item.uuid}>
                         <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a><br></br>
+                        <b>Description:</b>{item.description}
                         <hr className="news-list-div-hr"></hr>
-                        <b>Created:</b> {item.created}
+                        <b>Source:</b> {item.source} <br/>
+                        <b>Created:</b> {item.published_at}
                     </li>
                 ))}
             </ul>
