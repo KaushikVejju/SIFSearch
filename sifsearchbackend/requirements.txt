@@ -14,9 +14,9 @@ psycopg2-binary==2.9.9
 pycparser==2.21
 pycryptodome==3.20.0
 PyJWT==2.8.0
-Pyrebase4==4.6.0  # Downgrade to a compatible version
+Pyrebase4==4.6.0
 python-dotenv==1.0.0
 pytz==2023.3.post1
-requests==2.28.2  # Use a version compatible with both algoliasearch and pyrebase4
+requests==2.28.2
 sqlparse==0.4.4
-urllib3==2.1.0
+urllib3==1.26.15 # Use a compatible version with requests 2.28.2
