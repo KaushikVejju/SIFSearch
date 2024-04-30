@@ -6,6 +6,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 def upload_to(instance, filename):
+    # TODO: look into this
     return 'files/{filename}'.format(filename=filename)
 class SearchEntry(models.Model):
     user = models.CharField(max_length=100, default="")
