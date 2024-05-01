@@ -18,8 +18,8 @@ const Discover = () => {
 
     const getNewsInfo = () => {
         const options = {method: 'GET', headers: {accept: 'application/json'}};
-        var marketURL = `https://api.marketaux.com/v1/news/all?symbols=${ticker}&published_after=${startDate}&language=en&api_token=Ql2zyC7Oxfq0UgSFVwp1ED1zajnCSpktVOEUtfax`
-
+        // Commit the API KEYS
+        var marketURL = `https://api.marketaux.com/v1/news/all?symbols=${ticker}&published_after=${startDate}&language=en&api_token=${process.env.REACT_APP_MARKET_KEY}`
         fetch(marketURL, options)
         .then(response => response.json())
         .then(response => setNewsData(response.data))
